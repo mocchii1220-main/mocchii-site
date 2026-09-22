@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【サイトのタイトル：例 EQOverlay - テレビ風の地震速報オーバーレイ通知ツール】</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     1. ヒーローセクション（ページ最上部：背景動画対応）
+  ============================================= -->
+  <header class="hero-section">
+    <!-- ★ 新設：ヒーロー背景動画（ビデオを最背面に配置） -->
+    <video src="video/hero-bg.mp4" autoplay loop muted playsinline class="hero-video-bg"></video>
+    
+    <!-- ★ 新設：動画の上のテキストをクッキリ読ませるための半透明カバー -->
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <!-- <span class="app-badge">【ここにバージョンやラベル：例 Beta Version】</span> -->
+      <h1 class="hero-title">EQ-Overlay</h1>
+      <p class="hero-lead">どっかで見たことあるようなやつ...</p>
+    </div>
+  </header>
+
+  <!-- ==========================================
+     2. メインコンテンツ
+  ============================================= -->
+  <main class="main-container">
+
+    <!-- アプリの概要解説セクション -->
+    <section class="app-overview scroll-anim-up">
+      <div class="overview-inner">
+        <span class="overview-label">概要</span>
+        <h2>文字スーパーみたいなのをパソコンで表示するやつ</h2>
+        <p>
+          なんかテレビで見たことあるよね。。ね？<br>あれです。あれをパソコンにオーバーレイするやつです。<br>真面目に説明すると、P2P地震情報のAPIから緊急地震速報とか震度速報とかを受信して<br>リアルタイムで表示するソフトです。
+        </p>
+      </div>
+    </section>
+
+    <!-- 動作イメージ（左右交互にスクロール出現するデモ）エリア -->
+    <section class="app-demo-scroll-area">
+      <div class="demo-scroll-container">
+        <h2 class="demo-label">動作イメージ</h2>
+        
+        <!-- 1つ目の画像：地震速報（左画像 / 右テキスト） -->
+        <div class="demo-scroll-item">
+          <div class="demo-media-container demo-anim-left">
+            <div class="demo-media-wrapper">
+              <img src="images/demo_eq.png" alt="地震速報の表示イメージ" class="demo-media js-zoomable-img">
+            </div>
+          </div>
+          <div class="demo-text-container demo-anim-right">
+            <h3>某公共放送みたいなテロップ表示</h3>
+            <p>某公共放送を見てる人ならわかるはず...!<br>そんなテロップと言い回し<br>再現ではありません。リスペクトですyo!</p>
+          </div>
+        </div>
+        
+        <!-- 2つ目の画像：地名ごとの震度情報（右画像 / 左テキスト） -->
+        <div class="demo-scroll-item reversed">
+          <div class="demo-media-container demo-anim-right">
+            <div class="demo-media-wrapper">
+              <img src="images/demo_detail.png" alt="地名ごとの震度情報の表示イメージ" class="demo-media js-zoomable-img">
+            </div>
+          </div>
+          <div class="demo-text-container demo-anim-left">
+            <h3>やっぱり見覚えあるテロップ</h3>
+            <p>地域ごとの震度情報テロップも...なんか見覚えあるような？</p>
+          </div>
+        </div>
+        
+        <!-- 3つ目の画像：緊急地震速報（左画像 / 右テキスト） -->
+        <div class="demo-scroll-item">
+          <div class="demo-media-container demo-anim-left">
+            <div class="demo-media-wrapper">
+              <img src="images/demo_eew.png" alt="緊急地震速報の表示イメージ" class="demo-media js-zoomable-img">
+            </div>
+          </div>
+          <div class="demo-text-container demo-anim-right">
+            <h3><s>これだけは</s>独自デザイン</h3>
+            <p>地震情報とテロップ技術を共通にさせたかったので...<br>(地図とかは)ないです</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 設定アピールセクション（右画像 / 左テキスト） -->
+    <section class="app-setting-area">
+      <div class="demo-scroll-item reversed">
+        <div class="demo-media-container demo-anim-right">
+          <div class="demo-media-wrapper">
+            <img src="images/setting.png" alt="設定画面のイメージ" class="demo-media js-zoomable-img">
+          </div>
+        </div>
+        <div class="demo-text-container demo-anim-left">
+          <span class="feature-num">config.json</span>
+          <h3>一応、設定変更に対応</h3>
+          <p>
+            GUIを作るのがめんどくさかったんです　まあそんなこともある<br>設定については<a href="./HowTo/index.html">利用方法ページ</a>をどうぞ
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技術・データ・利用上の注意（2カラムグリッド） -->
+    <section class="app-mechanism-section scroll-anim-up">
+      <div class="mechanism-grid-container">
+        
+        <!-- 左側カード：データの仕組み -->
+        <div class="info-split-card accent-border-primary">
+          <div class="info-card-icon text-primary-color">
+            <svg viewBox="0 -960 960 960" class="app-svg-icon"><path fill="currentColor" d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-60Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+          </div>
+          <h3>利用しているAPIについて</h3>
+          <p>
+            <a href="https://www.p2pquake.net/develop/json_api_v2/">P2P地震情報API</a>を利用してデータを受信しています。配信元の状況によってデータが遅延、または届かない可能性があります。テレビや他の防災アプリケーションと併用してご利用ください。
+          </p>
+        </div>
+
+        <!-- 右側カード：利用に関する注意 -->
+        <div class="info-split-card accent-border-danger">
+          <div class="info-card-icon text-danger-color">
+            <svg viewBox="0 -960 960 960" class="app-svg-icon"><path fill="currentColor" d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+          </div>
+          <h3>利用に関する注意事項</h3>
+          <p>
+            ソフトの多重起動はサーバーに負荷をかける原因となってしまうため、お控え下さい。(P2P地震情報APIの使用上、IPアドレスあたりの同時接続は2つまでです。)また、今後のアップデートで同時起動を制限する可能性があります。
+          </p>
+          <p>
+            【他アプリとの競合に関する注意：例 他の地震関連アプリケーション（同じP2P地震速報APIを利用しているソフトなど）と同時に起動した場合、通信が競合して正常に通知を受け取れないことがあります。】
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 利用方法ページへの誘導ボタンエリア -->
+    <section class="app-howto-guide-area scroll-anim-up">
+      <div class="howto-guide-container">
+        <a href="./HowTo/index.html" class="btn btn-secondary btn-large">
+          <svg viewBox="0 -960 960 960" class="btn-svg-icon"><path fill="currentColor" d="M240-120q-33 0-56.5-23.5T160-240v-480q0-33 23.5-56.5T240-800h360l200 200v360q0 33-23.5 56.5T720-120H240Zm0-80h480v-320H560v-160H240v480Zm400-360v-40H520v40h120ZM240-200h480-480Z"/></svg>
+          【ボタンのテキスト：例 EQOverlayの詳しい利用方法・Q&Aはこちら】
+        </a>
+      </div>
+    </section>
+
+    <!-- ==========================================
+       3. ダウンロードエリア（最下部）
+    ============================================= -->
+    <section class="cta-section scroll-anim-up">
+      <h2>【ダウンロードエリアのタイトル：例 今すぐダウンロード】</h2>
+      
+      <!-- 開発中の注意書きバッジ -->
+      <div class="dev-warning-badge">【注意】現在開発中のベータ版です</div>
+      <div class="info-split-card accent-border-danger" style="margin-bottom: 20px;">
+          <div class="info-card-icon text-danger-color">
+            <svg viewBox="0 -960 960 960" class="app-svg-icon"><path fill="currentColor" d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+          </div>
+          <h3>【利用についてのタイトル：例 ご利用に関する注意事項】</h3>
+          <p>
+            【多重起動に関する注意：例 本アプリの多重起動（二重起動）は、データ配信サーバーに過度な負荷をかけてしまうため絶対におやめください。（今後のアップデートで同時起動を自動制限する可能性があります）】
+          </p>
+          <p>
+            【他アプリとの競合に関する注意：例 他の地震関連アプリケーション（同じP2P地震速報APIを利用しているソフトなど）と同時に起動した場合、通信が競合して正常に通知を受け取れないことがあります。】
+          </p>
+      </div>
+
+      </div>
+      <p>【対応OSや配布形式の説明：例 Windows 10 / 11 に対応。解凍してすぐ使えるzip形式です。】</p>
+           
+      <div class="cta-actions">
+        <!-- 直接ダウンロードボタン -->
+        <a href="【ビルド済みzipファイルの直リンクURL】" class="btn btn-primary js-dl-btn">
+          <svg viewBox="0 -960 960 960" class="btn-svg-icon"><path fill="currentColor" d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
+          GithubのReleaseへ
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- 5. 画像拡大ビューアー用モーダル -->
+  <div id="image-viewer-modal" class="image-viewer-overlay" aria-hidden="true">
+    <button class="image-viewer-close">&times;</button>
+    <img src="" alt="拡大表示" class="image-viewer-content">
+  </div>
+
+  <footer class="footer-section">
+    <p>&copy; 2026 【コピーライト表記：例 EQOverlay Project】. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
