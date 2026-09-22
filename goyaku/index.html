@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaagle誤訳</title>
+    <!-- Tailwind CSS for modern responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        /* Custom scrollbar for translation output */
+        textarea::-webkit-scrollbar, div::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        textarea::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+            background: #dadce0;
+            border-radius: 4px;
+        }
+        textarea::-webkit-scrollbar-thumb:hover, div::-webkit-scrollbar-thumb:hover {
+            background: #bdc1c6;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-gray-800 antialiased selection:bg-blue-100 selection:text-blue-700">
+
+    <!-- Top Header Navigation -->
+    <header class="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-50 flex items-center justify-between shadow-sm">
+        <div class="flex items-center space-x-3">
+            <button class="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors" title="メインメニュー">
+                <i class="fa-solid font-bold fa-bars text-lg"></i>
+            </button>
+            <!-- Gaagle Logo with custom brand colors -->
+            <div class="flex items-center space-x-1 cursor-pointer select-none" onclick="window.location.reload()">
+                <span class="text-2xl font-semibold tracking-tight">
+                    <span class="text-blue-500">G</span><span class="text-red-500">a</span><span class="text-yellow-500">a</span><span class="text-blue-500">g</span><span class="text-green-500">l</span><span class="text-red-500">e</span>
+                </span>
+                <span class="text-lg font-normal text-gray-600 ml-1">誤訳</span>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <button id="historyBtn" class="p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-colors relative" title="翻訳履歴">
+                <i class="fa-solid fa-history"></i>
+            </button>
+            <div class="h-6 w-px bg-gray-200 mx-1"></div>
+            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow">
+                G
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 flex flex-col space-y-4">
+
+        <!-- Mode Selectors & Quick Actions Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-2.5 rounded-xl border border-gray-200 shadow-sm">
+            <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider px-2">翻訳言語:</span>
+                <span class="text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-md font-medium border border-blue-200 flex items-center gap-1.5">
+                    <span>日本語</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    <span>英語</span>
+                </span>
+            </div>
+
+            <!-- Quick Example Fillers -->
+            <div class="flex items-center space-x-2">
+                <span class="text-xs text-gray-500 hidden sm:inline">例文を試す:</span>
+                <button onclick="insertSample('こんにちは！世界！')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1 rounded-md transition-colors">
+                    こんにちは
+                </button>
+                <button onclick="insertSample('お寿司が食べたいです。')" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1 rounded-md transition-colors">
+                    お寿司
+                </button>
+            </div>
+        </div>
+
+        <!-- Translation Interface Box -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col md:flex-row min-h-[360px]">
+
+            <!-- Left Panel: Source Input (Japanese) -->
+            <div class="flex-1 flex flex-col border-b md:border-b-0 md:border-r border-gray-200 bg-white">
+                <!-- Header Control bar -->
+                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50/50">
+                    <div class="flex items-center space-x-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 pb-1">
+                        <i class="fa-solid fa-language"></i>
+                        <span>日本語</span>
+                    </div>
+                    <button id="clearBtn" class="text-gray-400 hover:text-gray-600 p-1 rounded-full transition-colors hidden" title="テキストを消去">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Input Textarea -->
+                <div class="flex-1 p-4 flex flex-col">
+                    <textarea id="inputText" 
+                              class="w-full h-full min-h-[180px] focus:outline-none resize-none text-xl text-gray-800 placeholder-gray-400 font-normal bg-transparent" 
+                              placeholder="テキストを入力" 
+                              spellcheck="false"></textarea>
+                </div>
+
+                <!-- Bottom Toolbar for Input -->
+                <div class="flex items-center justify-between px-4 py-2 border-t border-gray-100 text-gray-500 text-sm">
+                    <div class="text-xs text-gray-400">原文 (日本語)</div>
+                    <div id="charCount" class="text-xs text-gray-400 font-mono">
+                        0 / 5000
+                    </div>
+                </div>
+            </div>
+
+            <!-- Swap Button Divider (Mobile and Desktop Responsive Placement) -->
+            <div class="relative bg-gray-100 md:w-0 h-1 md:h-auto flex items-center justify-center">
+                <div class="absolute z-10 bg-white border border-gray-300 shadow-sm rounded-full p-2 text-gray-500 hover:text-blue-600 hover:border-blue-300 transition-all cursor-pointer transform hover:scale-105" title="言語を入れ替え" onclick="swapPanels()">
+                    <i class="fa-solid fa-arrow-right-arrow-left text-sm hidden md:block"></i>
+                    <i class="fa-solid fa-arrow-down-up-across-line text-sm block md:hidden"></i>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output Translated Text (English / Romaji) -->
+            <div class="flex-1 flex flex-col bg-gray-50/60">
+                <!-- Header Control bar -->
+                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200/80 bg-gray-50">
+                    <div class="flex items-center space-x-2 text-sm font-semibold text-gray-700 border-b-2 border-gray-700 pb-1">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>英語</span>
+                    </div>
+                    <span class="text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded font-medium border border-red-200">
+                        英語
+                    </span>
+                </div>
+
+                <!-- Output Display Area -->
+                <div class="flex-1 p-4 relative flex flex-col">
+                    <div id="outputText" class="w-full h-full min-h-[180px] text-xl font-mono text-gray-800 whitespace-pre-wrap break-words leading-relaxed select-text">
+                        <span class="text-gray-400 font-sans italic text-base">翻訳結果がここに表示されます...</span>
+                    </div>
+
+                    <!-- Toast Notification inside panel -->
+                    <div id="copyToast" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-3 py-1.5 rounded-full shadow-lg transition-all opacity-0 pointer-events-none flex items-center space-x-1">
+                        <i class="fa-solid fa-check text-green-400"></i>
+                        <span>クリップボードにコピーしました</span>
+                    </div>
+                </div>
+
+                <!-- Bottom Toolbar for Output -->
+                <div class="flex items-center justify-between px-4 py-2 border-t border-gray-200/80 text-gray-500 text-sm bg-gray-50/80">
+                    <div class="flex items-center space-x-1">
+                        <button id="copyBtn" class="p-2 hover:bg-gray-200/60 rounded-full transition-colors text-gray-600 disabled:opacity-30" title="コピー" disabled>
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs text-gray-400">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Gaagle 翻訳エンジン</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- History Drawer / Modal Panel (Collapsible) -->
+        <div id="historyDrawer" class="hidden bg-white border border-gray-200 rounded-xl p-4 shadow-sm transition-all">
+            <div class="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
+                <h3 class="font-bold text-gray-700 flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-blue-500"></i> 翻訳履歴
+                </h3>
+                <button id="clearHistoryBtn" class="text-xs text-red-500 hover:text-red-700 hover:underline">
+                    履歴を消去
+                </button>
+            </div>
+            <div id="historyList" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                <div class="text-center text-sm text-gray-400 py-4">履歴はまだありません</div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4 mt-auto text-center text-xs text-gray-500">
+        <p>&copy; 2026 Gaagle 誤訳 Project. All rights reserved. (※これはジョークアプリです)</p>
+    </footer>
+
+    <script>
+        // Comprehensive Kana -> Romaji Dictionary Table
+        const ROMAJI_MAP = {
+            // Digraphs (拗音) - Hepburn
+            'きゃ': 'kya', 'きゅ': 'kyu', 'きょ': 'kyo',
+            'しゃ': 'sha', 'しゅ': 'shu', 'しょ': 'sho',
+            'ちゃ': 'cha', 'ちゅ': 'chu', 'ちょ': 'cho',
+            'にゃ': 'nya', 'にゅ': 'nyu', 'にょ': 'nyo',
+            'ひゃ': 'hya', 'ひゅ': 'hyu', 'ひょ': 'hyo',
+            'みゃ': 'mya', 'みゅ': 'myu', 'みょ': 'myo',
+            'りゃ': 'rya', 'りゅ': 'ryu', 'りょ': 'ryo',
+            'ぎゃ': 'gya', 'ぎゅ': 'gyu', 'ぎょ': 'gyo',
+            'じゃ': 'ja',  'じゅ': 'ju',  'じょ': 'jo',
+            'びゃ': 'bya', 'びゅ': 'byu', 'びょ': 'byo',
+            'ぴゃ': 'pya', 'ぴゅ': 'pyu', 'ぴょ': 'pyo',
+            'ファ': 'fa',  'フィ': 'fi',  'フェ': 'fe',  'フォ': 'fo',
+            'ティ': 'ti',  'ディ': 'di',  'デュ': 'dyu',
+
+            // Katakana Digraphs
+            'キャ': 'kya', 'キュ': 'kyu', 'キョ': 'kyo',
+            'シャ': 'sha', 'シュ': 'shu', 'ショ': 'sho',
+            'チャ': 'cha', 'チュ': 'chu', 'チョ': 'cho',
+            'ニャ': 'nya', 'ニュ': 'nyu', 'ニョ': 'nyo',
+            'ヒャ': 'hya', 'ヒュ': 'hyu', 'ヒョ': 'hyo',
+            'ミャ': 'mya', 'ミュ': 'myu', 'ミョ': 'myo',
+            'リャ': 'rya', 'リュ': 'ryu', 'リョ': 'ryo',
+            'ギャ': 'gya', 'ギュ': 'gyu', 'ギョ': 'gyo',
+            'ジャ': 'ja',  'ジュ': 'ju',  'ジョ': 'jo',
+            'ビャ': 'bya', 'ビュ': 'byu', 'ビョ': 'byo',
+            'ピャ': 'pya', 'ピュ': 'pyu', 'ピョ': 'pyo',
+
+            // Monographs (単音)
+            'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o',
+            'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
+            'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so',
+            'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to',
+            'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no',
+            'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho',
+            'ま': 'ma', 'み': 'mi', 'む': 'mu', 'め': 'me', 'も': 'mo',
+            'や': 'ya', 'ゆ': 'yu', 'よ': 'yo',
+            'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro',
+            'わ': 'wa', 'ゐ': 'i',  'ゑ': 'e',  'を': 'o',  'ん': 'n',
+            
+            'が': 'ga', 'ぎ': 'gi', 'ぐ': 'gu', 'げ': 'ge', 'ご': 'go',
+            'ざ': 'za', 'じ': 'ji', 'ず': 'zu', 'ぜ': 'ze', 'ぞ': 'zo',
+            'だ': 'da', 'ぢ': 'ji', 'づ': 'zu', 'で': 'de', 'ど': 'do',
+            'ば': 'ba', 'び': 'bi', 'ぶ': 'bu', 'べ': 'be', 'ぼ': 'bo',
+            'ぱ': 'pa', 'ぴ': 'pi', 'ぷ': 'pu', 'ぺ': 'pe', 'ぽ': 'po',
+
+            // Katakana Monograms
+            'ア': 'a', 'イ': 'i', 'ウ': 'u', 'エ': 'e', 'オ': 'o',
+            'カ': 'ka', 'キ': 'ki', 'ク': 'ku', 'ケ': 'ke', 'コ': 'ko',
+            'サ': 'sa', 'シ': 'shi', 'ス': 'su', 'セ': 'se', 'ソ': 'so',
+            'タ': 'ta', 'チ': 'chi', 'ツ': 'tsu', 'テ': 'te', 'ト': 'to',
+            'ナ': 'na', 'ニ': 'ni', 'ヌ': 'nu', 'ネ': 'ne', 'ノ': 'no',
+            'ハ': 'ha', 'ヒ': 'hi', 'フ': 'fu', 'ヘ': 'he', 'ホ': 'ho',
+            'マ': 'ma', 'ミ': 'mi', 'ム': 'mu', 'メ': 'me', 'モ': 'mo',
+            'ヤ': 'ya', 'ユ': 'yu', 'ヨ': 'yo',
+            'ラ': 'ra', 'リ': 'ri', 'ル': 'ru', 'レ': 're', 'ロ': 'ro',
+            'ワ': 'wa', 'ヰ': 'i',  'ヱ': 'e',  'ヲ': 'o',  'ン': 'n',
+
+            'ガ': 'ga', 'ギ': 'gi', 'グ': 'gu', 'ゲ': 'ge', 'ゴ': 'go',
+            'ザ': 'za', 'ジ': 'ji', 'ズ': 'zu', 'ゼ': 'ze', 'ゾ': 'zo',
+            'ダ': 'da', 'ヂ': 'ji', 'ヅ': 'zu', 'デ': 'de', 'ド': 'do',
+            'バ': 'ba', 'ビ': 'bi', 'ブ': 'bu', 'ベ': 'be', 'ボ': 'bo',
+            'パ': 'pa', 'ピ': 'pi', 'プ': 'pu', 'ペ': 'pe', 'ポ': 'po',
+
+            // Small vowels
+            'ぁ': 'a', 'ぃ': 'i', 'ぅ': 'u', 'ぇ': 'e', 'ぉ': 'o',
+            'ァ': 'a', 'ィ': 'i', 'ゥ': 'u', 'ェ': 'e', 'ォ': 'o',
+            'ー': '-'
+        };
+
+        // Simple Common Kanji Reading Dictionary
+        const KANJI_DICTIONARY = {
+            '一': 'ichi', '二': 'ni', '三': 'san', '四': 'yon', '五': 'go', '六': 'roku', '七': 'nana', '八': 'hachi', '九': 'kyuu', '十': 'juu',
+            '百': 'hyaku', '千': 'sen', '万': 'man', '日': 'nichi', '月': 'getsu', '火': 'ka', '水': 'mizu', '木': 'ki', '金': 'kin', '土': 'to',
+            '本': 'hon', '人': 'jin', '年': 'nen', '大': 'dai', '小': 'shou', '中': 'chuu', '国': 'koku', '上': 'ue', '下': 'shita', '長': 'chou',
+            '食': 'tabe', '飲': 'nomy', '見': 'mi', '行': 'iko', '来': 'ki', '出': 'de', '入': 'hai', '生': 'sei', '学': 'gaku', '校': 'kou',
+            '今': 'ima', '私': 'watashi', '僕': 'boku', '君': 'kimi', '彼': 'kare', '女': 'kanojo', '何': 'nani', '誰': 'dare', '東': 'tou', '京': 'kyou',
+            '特': 'tokku', '許': 'kyoka', '局': 'kyoku', '長': 'chou', '草': 'kusa', '笑': 'wara', '愛': 'ai', '猫': 'neko', '犬': 'inu', '魚': 'sakana',
+            '寿': 'su', '司': 'shi', '神': 'kami', '様': 'sama', '世': 'se', '界': 'kai', '好': 'suki'
+        };
+
+        let translationHistory = [];
+
+        // UI Element References
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const charCount = document.getElementById('charCount');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyToast = document.getElementById('copyToast');
+        const historyBtn = document.getElementById('historyBtn');
+        const historyDrawer = document.getElementById('historyDrawer');
+        const historyList = document.getElementById('historyList');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+        /**
+         * Converts Japanese text to Romaji (English mis-translation effect)
+         * @param {string} text - Input text
+         * @returns {string} Romaji output
+         */
+        function convertToRomaji(text) {
+            if (!text || text.trim() === '') return '';
+
+            let result = '';
+            let i = 0;
+
+            while (i < text.length) {
+                // Check Kanji Dictionary first
+                let kanjiMatch = false;
+                for (let kLen = 2; kLen >= 1; kLen--) {
+                    let sub = text.substring(i, i + kLen);
+                    if (KANJI_DICTIONARY[sub]) {
+                        result += KANJI_DICTIONARY[sub];
+                        i += kLen;
+                        kanjiMatch = true;
+                        break;
+                    }
+                }
+                if (kanjiMatch) continue;
+
+                // Handle Sokuon (っ / ッ)
+                if (text[i] === 'っ' || text[i] === 'ッ') {
+                    if (i + 1 < text.length) {
+                        let nextChar = text.substring(i + 1, i + 3);
+                        let nextRomaji = ROMAJI_MAP[nextChar] || ROMAJI_MAP[text[i + 1]];
+                        if (nextRomaji) {
+                            result += nextRomaji[0];
+                        }
+                    }
+                    i++;
+                    continue;
+                }
+
+                // Check 2-character Digraphs
+                let twoChars = text.substring(i, i + 2);
+                if (ROMAJI_MAP[twoChars]) {
+                    result += ROMAJI_MAP[twoChars];
+                    i += 2;
+                    continue;
+                }
+
+                // Check 1-character Monographs
+                let oneChar = text.substring(i, i + 1);
+                if (ROMAJI_MAP[oneChar]) {
+                    result += ROMAJI_MAP[oneChar];
+                    i++;
+                    continue;
+                }
+
+                // Non-kana characters
+                result += oneChar;
+                i++;
+            }
+
+            return result;
+        }
+
+        function updateTranslation() {
+            const val = inputText.value;
+            const length = val.length;
+
+            // Update character count
+            charCount.textContent = `${length} / 5000`;
+
+            // Toggle clear button visibility
+            if (length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            if (val.trim() === '') {
+                outputText.innerHTML = '<span class="text-gray-400 font-sans italic text-base">翻訳結果がここに表示されます...</span>';
+                copyBtn.disabled = true;
+            } else {
+                const romaji = convertToRomaji(val);
+                outputText.textContent = romaji;
+                copyBtn.disabled = false;
+
+                // Add to history debounce
+                saveToHistory(val, romaji);
+            }
+        }
+
+        // Debounced history save
+        let historyTimeout;
+        function saveToHistory(src, res) {
+            clearTimeout(historyTimeout);
+            historyTimeout = setTimeout(() => {
+                if (!src.trim()) return;
+                if (translationHistory.length > 0 && translationHistory[0].src === src) return;
+
+                translationHistory.unshift({ src, res, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                if (translationHistory.length > 10) translationHistory.pop();
+                renderHistory();
+            }, 1000);
+        }
+
+        function renderHistory() {
+            if (translationHistory.length === 0) {
+                historyList.innerHTML = '<div class="text-center text-sm text-gray-400 py-4">履歴はまだありません</div>';
+                return;
+            }
+
+            historyList.innerHTML = translationHistory.map((item, idx) => `
+                <div class="p-2.5 hover:bg-gray-50 rounded-lg border border-gray-100 flex items-center justify-between cursor-pointer transition-colors" onclick="loadHistoryItem(${idx})">
+                    <div class="overflow-hidden pr-2">
+                        <div class="text-xs font-semibold text-gray-800 truncate">${escapeHtml(item.src)}</div>
+                        <div class="text-xs text-blue-600 font-mono truncate">${escapeHtml(item.res)}</div>
+                    </div>
+                    <span class="text-[10px] text-gray-400 shrink-0">${item.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+            });
+        }
+
+        function loadHistoryItem(idx) {
+            const item = translationHistory[idx];
+            if (item) {
+                inputText.value = item.src;
+                updateTranslation();
+            }
+        }
+
+        function insertSample(text) {
+            inputText.value = text;
+            updateTranslation();
+        }
+
+        function swapPanels() {
+            const res = outputText.textContent;
+            if (res && !res.includes('翻訳結果がここに表示されます')) {
+                inputText.value = res;
+                updateTranslation();
+            }
+        }
+
+        function showToast(message) {
+            copyToast.querySelector('span').textContent = message;
+            copyToast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                copyToast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2000);
+        }
+
+        // Input Listeners
+        inputText.addEventListener('input', updateTranslation);
+
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            updateTranslation();
+            inputText.focus();
+        });
+
+        // Copy functionality
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = outputText.textContent;
+            if (!textToCopy) return;
+
+            const tempArea = document.createElement('textarea');
+            tempArea.value = textToCopy;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('クリップボードにコピーしました');
+            } catch (err) {
+                showToast('コピーに失敗しました');
+            }
+            document.body.removeChild(tempArea);
+        });
+
+        // History Toggle
+        historyBtn.addEventListener('click', () => {
+            historyDrawer.classList.toggle('hidden');
+        });
+
+        clearHistoryBtn.addEventListener('click', () => {
+            translationHistory = [];
+            renderHistory();
+        });
+
+        // Initial setup on load
+        window.onload = function() {
+            updateTranslation();
+        };
+    </script>
+</body>
+</html>
