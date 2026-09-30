@@ -1,5 +1,5 @@
 /* ==========================================
-   デザインシステム（★自動ダークモード対応）
+  デザインシステム（手動テーマ切替対応）
 ============================================= */
 :root {
   /* ライトモード・ダークモード共通のカラー */
@@ -9,8 +9,7 @@
   --content-width: 1200px;
   --radius: 12px;
 
-  /* OSの設定に応じて自動で色が切り替わる変数 */
-  /* light-dark(ライトモードの色, ダークモードの色) の順で指定しています */
+  /* 保存済みのテーマがない場合はOSの設定に応じて色が切り替わります */
   --bg-body: light-dark(#ffffff, #0b101d);       /* サイト全体の背景色 */
   --bg-card: light-dark(#f1f5f9, #1e293b);       /* 注意書きカードの背景色 */
   --bg-cta: light-dark(#f8fafc, #1e293b);        /* DLエリアの背景色 */
@@ -30,6 +29,32 @@
   color-scheme: light dark;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-body: #ffffff;
+  --bg-card: #f1f5f9;
+  --bg-cta: #f8fafc;
+  --bg-badge: #f8fafc;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --text-dark: #0b101d;
+  --border-color: #e2e8f0;
+  --bg-terms: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-body: #0b101d;
+  --bg-card: #1e293b;
+  --bg-cta: #1e293b;
+  --bg-badge: rgba(255, 255, 255, 0.1);
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dark: #ffffff;
+  --border-color: #334155;
+  --bg-terms: #0b101d;
+}
+
 /* リセット＆ベース設定 */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -39,6 +64,34 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  width: 46px;
+  min-height: 46px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: width 0.2s ease, gap 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+.theme-toggle-icon { flex: 0 0 24px; width: 24px; height: 24px; }
+.theme-toggle-label { max-width: 0; overflow: hidden; opacity: 0; white-space: nowrap; transition: max-width 0.2s ease, opacity 0.2s ease; }
+.theme-toggle:hover, .theme-toggle:focus-visible { width: 190px; gap: 8px; background: rgba(15, 23, 42, 0.9); transform: translateY(-1px); }
+.theme-toggle:hover .theme-toggle-label, .theme-toggle:focus-visible .theme-toggle-label { max-width: 150px; opacity: 1; }
+.theme-toggle:focus-visible { outline: 3px solid #93c5fd; outline-offset: 3px; }
 
 /* 埋め込みSVGアイコンのサイズ共通調整 */
 .app-svg-icon { width: 28px; height: 28px; display: block; }

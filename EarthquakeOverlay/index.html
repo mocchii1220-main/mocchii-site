@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>【サイトのタイトル：例 EQOverlay - テレビ風の地震速報オーバーレイ通知ツール】</title>
+  <title>EarthquakeOverlay</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 <body>
+
+  <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+    <svg class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.42-1.42M4.92 19.08l1.42-1.42m0-11.32L4.92 4.92m14.16 14.16-1.42-1.42M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/>
+    </svg>
+    <span class="theme-toggle-label">ダークモードに切り替え</span>
+  </button>
 
   <!-- ==========================================
      1. ヒーローセクション（ページ最上部：背景動画対応）
@@ -21,7 +29,7 @@
     <div class="hero-content">
       <!-- <span class="app-badge">【ここにバージョンやラベル：例 Beta Version】</span> -->
       <h1 class="hero-title">EQ-Overlay</h1>
-      <p class="hero-lead">どっかで見たことあるようなやつ...</p>
+      <p class="hero-lead">EarthquakeOverlayが正式名称の予定です<br>どういうソフトなのかはページ下部を見てね</p>
     </div>
   </header>
 
@@ -55,7 +63,7 @@
           </div>
           <div class="demo-text-container demo-anim-right">
             <h3>某公共放送みたいなテロップ表示</h3>
-            <p>某公共放送を見てる人ならわかるはず...!<br>そんなテロップと言い回し<br>再現ではありません。リスペクトですyo!</p>
+            <p>某公共放送を見てる人ならわかるはず...!<br>そんなテロップと言い回し<br>再現ではありません。リスペクトです！<br>リスペクトならしかたないよね...</p>
           </div>
         </div>
         
@@ -68,7 +76,7 @@
           </div>
           <div class="demo-text-container demo-anim-left">
             <h3>やっぱり見覚えあるテロップ</h3>
-            <p>地域ごとの震度情報テロップも...なんか見覚えあるような？</p>
+            <p>地域ごとの震度情報テロップも...なんか見覚えあるような？<br>N○Kに似ているような...?</p>
           </div>
         </div>
         
@@ -100,7 +108,7 @@
           <span class="feature-num">config.json</span>
           <h3>一応、設定変更に対応</h3>
           <p>
-            GUIを作るのがめんどくさかったんです　まあそんなこともある<br>設定については<a href="./HowTo/index.html">利用方法ページ</a>をどうぞ
+            GUIを作るのがめんどくさかったんです　まあそんなこともある<br><br>画像はVSCodeですが、メモ帳とかでもできると思います。設定については<a href="./HowTo/index.html">利用方法ページ</a>をどうぞ
           </p>
         </div>
       </div>
@@ -143,7 +151,7 @@
       <div class="howto-guide-container">
         <a href="./HowTo/index.html" class="btn btn-secondary btn-large">
           <svg viewBox="0 -960 960 960" class="btn-svg-icon"><path fill="currentColor" d="M240-120q-33 0-56.5-23.5T160-240v-480q0-33 23.5-56.5T240-800h360l200 200v360q0 33-23.5 56.5T720-120H240Zm0-80h480v-320H560v-160H240v480Zm400-360v-40H520v40h120ZM240-200h480-480Z"/></svg>
-          【ボタンのテキスト：例 EQOverlayの詳しい利用方法・Q&Aはこちら】
+          利用方法の詳細など...
         </a>
       </div>
     </section>
@@ -152,7 +160,7 @@
        3. ダウンロードエリア（最下部）
     ============================================= -->
     <section class="cta-section scroll-anim-up">
-      <h2>【ダウンロードエリアのタイトル：例 今すぐダウンロード】</h2>
+      <h2>ダウンロード・注意事項</h2>
       
       <!-- 開発中の注意書きバッジ -->
       <div class="dev-warning-badge">【注意】現在開発中のベータ版です</div>
@@ -170,7 +178,7 @@
       </div>
 
       </div>
-      <p>【対応OSや配布形式の説明：例 Windows 10 / 11 に対応。解凍してすぐ使えるzip形式です。】</p>
+      <p>exeファイル単体です。Windows専用です。MacOS Linuxでは利用できません。</p>
            
       <div class="cta-actions">
         <!-- 直接ダウンロードボタン -->

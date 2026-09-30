@@ -1,0 +1,63 @@
+@media (max-width: 600px) {
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 80px 20px 72px;
+  }
+  .hero-title { font-size: 2.5rem; }
+  .hero-lead { font-size: 1rem; }
+  .theme-toggle {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .main-container { padding: 0 16px 64px; }
+  .demo-anim-left, .demo-anim-right, .scroll-anim-up { animation: none; }
+  .app-overview { padding: 72px 0 56px; }
+  .overview-label, .demo-label { font-size: 1.75rem; }
+  .overview-label { margin-bottom: 16px; }
+  .app-overview h2 { font-size: 1.55rem; margin-bottom: 18px; }
+  .app-overview p { font-size: 1rem; }
+  .app-demo-scroll-area { padding: 24px 0 32px; }
+  .demo-label { margin-bottom: 40px; }
+  .demo-scroll-item, .demo-scroll-item.reversed {
+    gap: 20px;
+    margin-bottom: 72px;
+  }
+  .demo-text-container h3 { font-size: 1.3rem; }
+  .demo-text-container p { font-size: 1rem; }
+  .app-setting-area { padding: 32px 0 24px; }
+  .app-mechanism-section { padding: 32px 0 24px; }
+  .mechanism-grid-container { padding: 0; }
+  .info-split-card { padding: 24px 20px; }
+  .app-howto-guide-area { padding: 24px 0 12px; }
+  .btn-large { min-height: 52px; padding: 14px 18px; }
+  .cta-section {
+    padding: 36px 18px;
+    border-radius: var(--radius);
+    margin-top: 24px;
+  }
+  .cta-section h2 { font-size: 1.75rem; }
+  .cta-section p { font-size: 1rem; }
+  .dev-warning-badge { max-width: 100%; }
+  .cta-actions { align-items: stretch; }
+  .cta-actions .btn { width: 100%; min-height: 52px; padding: 14px 16px; }
+  .image-viewer-content {
+    max-width: calc(100% - 24px);
+    max-height: calc(100svh - 96px);
+  }
+  .image-viewer-close {
+    top: max(8px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    width: 44px;
+    height: 44px;
+    font-size: 32px;
+  }
+  .footer-section { padding: 40px 16px; }
+}
+
+@media (max-width: 600px) and (hover: none) {
+  .theme-toggle:hover { width: 46px; gap: 0; transform: none; }
+  .theme-toggle:hover .theme-toggle-label { max-width: 0; opacity: 0; }
+  .btn-primary:hover, .btn-secondary:hover { transform: none; }
+}

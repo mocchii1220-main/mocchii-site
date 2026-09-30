@@ -1,5 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
+  // 0. ライト/ダークモードの切り替え
+  // ==========================================
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeToggleLabel = themeToggle.querySelector(".theme-toggle-label");
+  const savedTheme = localStorage.getItem("earthquake-overlay-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+  const updateTheme = (theme) => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+    const label = theme === "dark"
+      ? "To Lightmode"
+      : "To Darkmode";
+    themeToggleLabel.textContent = label;
+    themeToggle.setAttribute("aria-label", label);
+  };
+
+  if (themeToggle) {
+    updateTheme(initialTheme);
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      updateTheme(nextTheme);
+      localStorage.setItem("earthquake-overlay-theme", nextTheme);
+    });
+  }
+
+  // ==========================================
   // 1. 利用規約未チェック時のエラー制御モーダル
   // ==========================================
   const termsCheckbox = document.getElementById("terms-checkbox");
