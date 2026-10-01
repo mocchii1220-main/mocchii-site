@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EarthquakeOverlay</title>
+  <title>Earthquake-Overlay</title>
+  <meta name="description" content="P2P地震情報APIから取得した地震情報をWindows PCにオーバーレイ表示するソフトです。">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="mobile.css">
 </head>
@@ -29,7 +30,7 @@
     <div class="hero-content">
       <!-- <span class="app-badge">【ここにバージョンやラベル：例 Beta Version】</span> -->
       <h1 class="hero-title">EQ-Overlay</h1>
-      <p class="hero-lead">EarthquakeOverlayが正式名称の予定です<br>どういうソフトなのかはページ下部を見てね</p>
+      <p class="hero-lead">Earthquake-Overlayが正式名称の予定です<br>どういうソフトなのかはページ下部を見てね</p>
     </div>
   </header>
 
@@ -139,7 +140,7 @@
             ソフトの多重起動はサーバーに負荷をかける原因となってしまうため、お控え下さい。(P2P地震情報APIの使用上、IPアドレスあたりの同時接続は2つまでです。)また、今後のアップデートで同時起動を制限する可能性があります。
           </p>
           <p>
-            【他アプリとの競合に関する注意：例 他の地震関連アプリケーション（同じP2P地震速報APIを利用しているソフトなど）と同時に起動した場合、通信が競合して正常に通知を受け取れないことがあります。】
+            P2P地震情報APIを利用している他の地震関連アプリケーションと同時に起動した場合、同時接続となりエラーとなってしまう場合があります。その場合はどちらかのソフトを終了することで起動できるようになります。
           </p>
         </div>
 
@@ -160,21 +161,26 @@
        3. ダウンロードエリア（最下部）
     ============================================= -->
     <section class="cta-section scroll-anim-up">
-      <h2>ダウンロード・注意事項</h2>
+      <h2>ダウンロード・利用規約</h2>
       
       <!-- 開発中の注意書きバッジ -->
-      <div class="dev-warning-badge">【注意】現在開発中のベータ版です</div>
+      <div class="dev-warning-badge">【注意】現在開発中のプレビュー版です</div>
       <div class="info-split-card accent-border-danger" style="margin-bottom: 20px;">
           <div class="info-card-icon text-danger-color">
             <svg viewBox="0 -960 960 960" class="app-svg-icon"><path fill="currentColor" d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
           </div>
-          <h3>【利用についてのタイトル：例 ご利用に関する注意事項】</h3>
+          <h3>利用規約</h3>
           <p>
-            【多重起動に関する注意：例 本アプリの多重起動（二重起動）は、データ配信サーバーに過度な負荷をかけてしまうため絶対におやめください。（今後のアップデートで同時起動を自動制限する可能性があります）】
-          </p>
+              本規約は、もっちー（以下「当方」）が提供するEarthquake-Overlay（以下「本サービス」）の利用条件を定めるものです。本ソフトウェアを利用した時点で、本規約に同意したものとみなします。          </p>
           <p>
-            【他アプリとの競合に関する注意：例 他の地震関連アプリケーション（同じP2P地震速報APIを利用しているソフトなど）と同時に起動した場合、通信が競合して正常に通知を受け取れないことがあります。】
+              完全無保証です。本ソフトウェアは無料のフリーソフトです。動作の保証や、情報の正確性の保証は一切ありません。　お使いのPCに不具合が起きた場合や、地震情報の遅延・誤りによって損害が生じた場合も、当方は一切の責任を負いません。
           </p>
+          <details class="software-readme-disclosure">
+            <summary>ソフトウェア情報を表示</summary>
+            <div id="software-readme" class="software-readme" aria-live="polite">
+              <p class="software-readme-status">READMEを読み込んでいます...</p>
+            </div>
+          </details>
       </div>
 
       </div>
@@ -182,7 +188,7 @@
            
       <div class="cta-actions">
         <!-- 直接ダウンロードボタン -->
-        <a href="【ビルド済みzipファイルの直リンクURL】" class="btn btn-primary js-dl-btn">
+        <a href="https://github.com/mocchii1220-main/eq-overlay/releases" class="btn btn-primary js-dl-btn">
           <svg viewBox="0 -960 960 960" class="btn-svg-icon"><path fill="currentColor" d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
           GithubのReleaseへ
         </a>
@@ -200,7 +206,7 @@
   </div>
 
   <footer class="footer-section">
-    <p>&copy; 2026 【コピーライト表記：例 EQOverlay Project】. All rights reserved.</p>
+    <p>Copyright © 2026 mocchii All Rights Reserved.</p>
   </footer>
 
   <script src="js/main.js"></script>

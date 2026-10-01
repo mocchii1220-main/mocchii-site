@@ -255,6 +255,35 @@ body {
 .info-split-card h3 { font-size: 1.25rem; color: var(--text-dark); margin-bottom: 16px; font-weight: 800; }
 .info-split-card p { font-size: 14px; color: var(--text-main); line-height: 1.7; margin-bottom: 14px; }
 .info-split-card p:last-child { margin-bottom: 0; }
+.software-readme-disclosure { border-top: 1px solid var(--border-color); margin-top: 20px; padding-top: 12px; text-align: left; }
+.software-readme-disclosure summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--text-dark); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; }
+.software-readme-disclosure summary::-webkit-details-marker { display: none; }
+.software-readme-disclosure summary::after { content: "+"; color: var(--primary); font-size: 20px; line-height: 1; }
+.software-readme-disclosure[open] summary::after { content: "−"; }
+.software-readme-disclosure summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+.software-readme-disclosure { interpolate-size: allow-keywords; }
+.software-readme-disclosure::details-content {
+  block-size: 0;
+  overflow: clip;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: block-size 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, transform 0.35s ease, content-visibility 0.45s allow-discrete;
+}
+.software-readme-disclosure[open]::details-content { block-size: auto; opacity: 1; transform: translateY(0); }
+.software-readme { padding-top: 8px; }
+.software-readme h3, .software-readme h4, .software-readme h5 { color: var(--text-dark); line-height: 1.5; margin: 14px 0 8px; }
+.software-readme h3 { font-size: 1.15rem; }
+.software-readme h4 { font-size: 1.05rem; }
+.software-readme h5 { font-size: 1rem; }
+.software-readme p, .software-readme li { color: var(--text-main); font-size: 14px; line-height: 1.7; }
+.software-readme ul, .software-readme ol { margin: 8px 0 14px; padding-left: 24px; }
+.software-readme li { padding-left: 4px; }
+.software-readme a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.software-readme code { background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 4px; padding: 1px 5px; font-size: 0.9em; overflow-wrap: anywhere; }
+.software-readme-status { color: var(--text-muted) !important; font-size: 13px !important; margin-bottom: 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .software-readme-disclosure::details-content { transition: none; }
+}
 
 /* 利用方法（HowTo）への誘導エリア */
 .app-howto-guide-area { padding: 40px 0 20px; text-align: center; }
