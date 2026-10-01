@@ -281,8 +281,11 @@ body {
 .software-readme a { color: var(--primary); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .software-readme code { background: var(--bg-body); border: 1px solid var(--border-color); border-radius: 4px; padding: 1px 5px; font-size: 0.9em; overflow-wrap: anywhere; }
 .software-readme-status { color: var(--text-muted) !important; font-size: 13px !important; margin-bottom: 0 !important; }
+<<<<<<< HEAD
 .software-readme-retry { padding: 0; border: 0; background: none; color: var(--primary); font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .software-readme-retry:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 2px; }
+=======
+>>>>>>> e660fca0f3c148e0f7ff339989b20cc95e4ae867
 @media (prefers-reduced-motion: reduce) {
   .software-readme-disclosure::details-content { transition: none; }
 }

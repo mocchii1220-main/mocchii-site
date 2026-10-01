@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return fragment;
     };
 
+<<<<<<< HEAD
     const loadSoftwareReadme = () => {
       softwareReadme.replaceChildren();
       const loadingStatus = document.createElement("p");
@@ -163,6 +164,31 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     loadSoftwareReadme();
+=======
+    fetch("softwareReadme.md")
+      .then((response) => {
+        if (!response.ok) throw new Error("READMEの読み込みに失敗しました。");
+        return response.text();
+      })
+      .then((markdown) => {
+        softwareReadme.replaceChildren();
+        if (markdown.trim()) {
+          softwareReadme.append(renderMarkdown(markdown));
+        } else {
+          const status = document.createElement("p");
+          status.className = "software-readme-status";
+          status.textContent = "softwareReadme.md はまだ空です。";
+          softwareReadme.append(status);
+        }
+      })
+      .catch(() => {
+        softwareReadme.replaceChildren();
+        const status = document.createElement("p");
+        status.className = "software-readme-status";
+        status.textContent = "READMEを読み込めませんでした。";
+        softwareReadme.append(status);
+      });
+>>>>>>> e660fca0f3c148e0f7ff339989b20cc95e4ae867
   }
 
   // ==========================================
