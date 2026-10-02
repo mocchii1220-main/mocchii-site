@@ -1,0 +1,168 @@
+.howto-main {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 24px 72px;
+	scroll-margin-top: 96px;
+}
+.howto-intro {
+	padding: 112px 20px 48px;
+	text-align: center;
+}
+.howto-intro .overview-label { margin-bottom: 12px; }
+.howto-page-title {
+	margin-bottom: 8px;
+	color: var(--text-dark);
+	font-size: 2.4rem;
+	font-weight: 800;
+}
+.howto-page-lead {
+	margin-bottom: 36px;
+	color: var(--text-muted);
+	font-size: 1.05rem;
+}
+.howto-intro h2 {
+	margin-bottom: 16px;
+	color: var(--text-dark);
+	font-size: 1.5rem;
+	font-weight: 800;
+}
+.howto-intro p {
+	color: var(--text-muted);
+	font-size: 1.05rem;
+}
+.howto-step {
+	display: grid;
+	grid-template-columns: 72px minmax(0, 1fr);
+	gap: 24px;
+	padding: 40px 20px;
+	border-top: 1px solid var(--border-color);
+	scroll-margin-top: 96px;
+}
+.howto-step-number {
+	color: var(--primary);
+	font-size: 1.75rem;
+	font-weight: 800;
+	line-height: 1.2;
+}
+.howto-step-label {
+	display: block;
+	margin-bottom: 6px;
+	color: var(--text-muted);
+	font-size: 12px;
+	font-weight: 700;
+}
+.howto-step-content h2 {
+	margin-bottom: 14px;
+	color: var(--text-dark);
+	font-size: 1.5rem;
+	font-weight: 800;
+}
+.howto-step-content p,
+.howto-checklist {
+	color: var(--text-main);
+	font-size: 1rem;
+	line-height: 1.8;
+}
+.howto-action { margin-top: 20px; }
+.howto-setting-heading {
+	margin-top: 28px;
+	color: var(--text-dark);
+	font-size: 1.1rem;
+	font-weight: 800;
+}
+.howto-setting-table {
+	width: min(100%, 440px);
+	margin-top: 14px;
+	border-collapse: collapse;
+	color: var(--text-main);
+	text-align: left;
+}
+.howto-setting-table th,
+.howto-setting-table td {
+	padding: 9px 14px;
+	border-bottom: 1px solid var(--border-color);
+}
+.howto-setting-table th {
+	background: var(--bg-card);
+	color: var(--text-dark);
+	font-size: 14px;
+}
+.howto-setting-table td { font-size: 14px; }
+.howto-setting-table code {
+	color: var(--text-dark);
+	font-family: Consolas, "Courier New", monospace;
+}
+.howto-note {
+	margin-top: 18px;
+	padding: 14px 16px;
+	border-left: 4px solid var(--danger);
+	background: var(--bg-card);
+}
+.howto-config-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	align-items: center;
+	gap: 24px;
+	margin-top: 22px;
+}
+.howto-config-grid pre {
+	overflow-x: auto;
+	padding: 22px;
+	border-radius: 8px;
+	background: #101827;
+	color: #e2e8f0;
+	font-size: 14px;
+	line-height: 1.8;
+}
+.howto-config-grid code { font-family: Consolas, "Courier New", monospace; }
+.howto-config-figure { min-width: 0; }
+.howto-config-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+}
+.howto-config-figure figcaption {
+	margin-top: 8px;
+	color: var(--text-muted);
+	font-size: 13px;
+	text-align: right;
+}
+.howto-checklist {
+	display: grid;
+	gap: 8px;
+	margin-top: 20px;
+	padding-left: 1.4em;
+}
+.howto-footer-cta {
+	display: grid;
+	justify-items: center;
+	gap: 16px;
+	padding: 48px 20px 16px;
+	border-top: 1px solid var(--border-color);
+	text-align: center;
+}
+.howto-footer-cta p { color: var(--text-muted); }
+.howto-footer-cta .btn { width: min(100%, 480px); }
+
+@media (max-width: 600px) {
+	.howto-main { padding: 0 16px 48px; }
+	.howto-intro { padding: 88px 4px 32px; }
+	.howto-page-title { font-size: 1.9rem; }
+	.howto-page-lead { margin-bottom: 28px; font-size: 1rem; }
+	.howto-intro h2 { font-size: 1.3rem; }
+	.howto-intro p { font-size: 1rem; }
+	.howto-step {
+		grid-template-columns: 42px minmax(0, 1fr);
+		gap: 12px;
+		padding: 30px 4px;
+	}
+	.howto-step-number { font-size: 1.35rem; }
+	.howto-step-content h2 { font-size: 1.25rem; }
+	.howto-step-content p,
+	.howto-checklist { font-size: 0.95rem; }
+	.howto-config-grid { grid-template-columns: 1fr; gap: 18px; }
+	.howto-config-grid pre { padding: 18px; font-size: 13px; }
+	.howto-footer-cta { padding: 36px 4px 8px; }
+}

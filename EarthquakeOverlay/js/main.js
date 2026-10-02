@@ -1,194 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ==========================================
-  // 0. ライト/ダークモードの切り替え
-  // ==========================================
-  const themeToggle = document.getElementById("theme-toggle");
-  const themeToggleLabel = themeToggle.querySelector(".theme-toggle-label");
-  const savedTheme = localStorage.getItem("earthquake-overlay-theme");
-  const initialTheme = savedTheme === "light" || savedTheme === "dark"
-    ? savedTheme
-    : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const siteHeader = document.getElementById("site-header");
+  const menuToggle = document.getElementById("menu-toggle");
+  const siteNavigation = document.getElementById("site-navigation");
 
-  const updateTheme = (theme) => {
-    document.documentElement.dataset.theme = theme;
-    document.documentElement.style.colorScheme = theme;
-    themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
-    const label = theme === "dark"
-      ? "To Lightmode"
-      : "To Darkmode";
-    themeToggleLabel.textContent = label;
-    themeToggle.setAttribute("aria-label", label);
+  const closeMenu = () => {
+    siteHeader.classList.remove("is-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "メニューを開く");
+    siteNavigation.setAttribute("aria-hidden", "true");
   };
 
-  if (themeToggle) {
-    updateTheme(initialTheme);
-    themeToggle.addEventListener("click", () => {
-      const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-      updateTheme(nextTheme);
-      localStorage.setItem("earthquake-overlay-theme", nextTheme);
-    });
-  }
+  menuToggle.addEventListener("click", () => {
+    const isOpen = siteHeader.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+    siteNavigation.setAttribute("aria-hidden", String(!isOpen));
+  });
+
+  siteNavigation.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!siteHeader.contains(event.target)) closeMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
 
   // ==========================================
-  // 0.5. READMEのMarkdown表示
+  // 0.25. OS別のプレビュー警告
   // ==========================================
-  const softwareReadme = document.getElementById("software-readme");
+  const devWarningBadge = document.getElementById("dev-warning-badge");
 
-  if (softwareReadme) {
-    const appendInlineMarkdown = (parent, text) => {
-      const inlinePattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\.{0,2}\/[^\s)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|\*([^*]+)\*/g;
-      let lastIndex = 0;
-      let match;
+  if (devWarningBadge) {
+    const windowsNtVersion = navigator.userAgent.match(/Windows NT ([\d.]+)/i);
+    const platform = navigator.userAgentData?.platform || navigator.platform;
+    const isWindows = /^win/i.test(platform) || Boolean(windowsNtVersion);
+    let warning = "【注意】現在開発中のプレビュー版です";
 
-      while ((match = inlinePattern.exec(text)) !== null) {
-        parent.append(document.createTextNode(text.slice(lastIndex, match.index)));
+    if (!isWindows) {
+      warning += "・Windows PC以外では動作しません";
+    } else if (windowsNtVersion && Number.parseFloat(windowsNtVersion[1]) < 10) {
+      warning += "・Windows NT: 10.0未満のため動作未確認です";
+    }
 
-        if (match[1] !== undefined) {
-          const link = document.createElement("a");
-          link.href = match[2];
-          link.textContent = match[1];
-          if (/^https?:\/\//i.test(match[2])) {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-          }
-          parent.append(link);
-        } else {
-          const element = document.createElement(match[3] !== undefined ? "strong" : match[4] !== undefined ? "code" : "em");
-          element.textContent = match[3] ?? match[4] ?? match[5];
-          parent.append(element);
-        }
-
-        lastIndex = inlinePattern.lastIndex;
-      }
-
-      parent.append(document.createTextNode(text.slice(lastIndex)));
-    };
-
-    const renderMarkdown = (markdown) => {
-      const fragment = document.createDocumentFragment();
-      let paragraphLines = [];
-      let listElement = null;
-
-      const flushParagraph = () => {
-        if (paragraphLines.length === 0) return;
-        const paragraph = document.createElement("p");
-        appendInlineMarkdown(paragraph, paragraphLines.join(" "));
-        fragment.append(paragraph);
-        paragraphLines = [];
-      };
-
-      const closeList = () => {
-        if (listElement) fragment.append(listElement);
-        listElement = null;
-      };
-
-      markdown.replace(/\r\n?/g, "\n").split("\n").forEach((line) => {
-        const heading = line.match(/^(#{1,3})\s+(.+)$/);
-        const unorderedItem = line.match(/^\s*[-*+]\s+(.+)$/);
-        const orderedItem = line.match(/^\s*\d+\.\s+(.+)$/);
-
-        if (heading) {
-          flushParagraph();
-          closeList();
-          const element = document.createElement(`h${Math.min(heading[1].length + 2, 5)}`);
-          appendInlineMarkdown(element, heading[2]);
-          fragment.append(element);
-        } else if (unorderedItem || orderedItem) {
-          flushParagraph();
-          const listTag = unorderedItem ? "ul" : "ol";
-          if (!listElement || listElement.tagName.toLowerCase() !== listTag) {
-            closeList();
-            listElement = document.createElement(listTag);
-          }
-          const item = document.createElement("li");
-          appendInlineMarkdown(item, (unorderedItem || orderedItem)[1]);
-          listElement.append(item);
-        } else if (line.trim() === "") {
-          flushParagraph();
-          closeList();
-        } else {
-          closeList();
-          paragraphLines.push(line.trim());
-        }
-      });
-
-      flushParagraph();
-      closeList();
-      return fragment;
-    };
-
-<<<<<<< HEAD
-    const loadSoftwareReadme = () => {
-      softwareReadme.replaceChildren();
-      const loadingStatus = document.createElement("p");
-      loadingStatus.className = "software-readme-status";
-      loadingStatus.textContent = "READMEを読み込んでいます...";
-      softwareReadme.append(loadingStatus);
-
-      const controller = new AbortController();
-      const timeoutId = window.setTimeout(() => controller.abort(), 10000);
-
-      fetch("softwareReadme.md", { signal: controller.signal })
-        .then((response) => {
-          if (!response.ok) throw new Error("READMEの読み込みに失敗しました。");
-          return response.text();
-        })
-        .then((markdown) => {
-          softwareReadme.replaceChildren();
-          if (markdown.trim()) {
-            softwareReadme.append(renderMarkdown(markdown));
-          } else {
-            const status = document.createElement("p");
-            status.className = "software-readme-status";
-            status.textContent = "softwareReadme.md はまだ空です。";
-            softwareReadme.append(status);
-          }
-        })
-        .catch((error) => {
-          softwareReadme.replaceChildren();
-          const status = document.createElement("p");
-          status.className = "software-readme-status";
-          status.textContent = error.name === "AbortError"
-            ? "READMEの読み込みがタイムアウトしました。"
-            : "READMEを読み込めませんでした。";
-          softwareReadme.append(status);
-
-          const retryButton = document.createElement("button");
-          retryButton.type = "button";
-          retryButton.className = "software-readme-retry";
-          retryButton.textContent = "再試行";
-          retryButton.addEventListener("click", loadSoftwareReadme, { once: true });
-          softwareReadme.append(retryButton);
-        })
-        .finally(() => window.clearTimeout(timeoutId));
-    };
-
-    loadSoftwareReadme();
-=======
-    fetch("softwareReadme.md")
-      .then((response) => {
-        if (!response.ok) throw new Error("READMEの読み込みに失敗しました。");
-        return response.text();
-      })
-      .then((markdown) => {
-        softwareReadme.replaceChildren();
-        if (markdown.trim()) {
-          softwareReadme.append(renderMarkdown(markdown));
-        } else {
-          const status = document.createElement("p");
-          status.className = "software-readme-status";
-          status.textContent = "softwareReadme.md はまだ空です。";
-          softwareReadme.append(status);
-        }
-      })
-      .catch(() => {
-        softwareReadme.replaceChildren();
-        const status = document.createElement("p");
-        status.className = "software-readme-status";
-        status.textContent = "READMEを読み込めませんでした。";
-        softwareReadme.append(status);
-      });
->>>>>>> e660fca0f3c148e0f7ff339989b20cc95e4ae867
+    devWarningBadge.textContent = warning;
   }
 
   // ==========================================

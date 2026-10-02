@@ -10,17 +10,28 @@
 </head>
 <body>
 
-  <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
-    <svg class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M12 4V2m0 20v-2m8-8h2M2 12h2m13.66-5.66 1.42-1.42M4.92 19.08l1.42-1.42m0-11.32L4.92 4.92m14.16 14.16-1.42-1.42M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/>
-    </svg>
-    <span class="theme-toggle-label">ダークモードに切り替え</span>
-  </button>
+  <header class="site-header" id="site-header">
+    <a class="site-brand" href="#top" aria-label="Earthquake-Overlay トップへ">
+      <img src="images/logo.webp" alt="Earthquake-Overlay">
+    </a>
+    <button type="button" class="menu-toggle" id="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-navigation">
+      <span class="menu-toggle-line"></span>
+      <span class="menu-toggle-line"></span>
+      <span class="menu-toggle-line"></span>
+    </button>
+    <nav class="site-navigation" id="site-navigation" aria-label="メインメニュー" aria-hidden="true">
+      <a href="#overview">概要</a>
+      <a href="#demo">動作イメージ</a>
+      <a href="#settings">設定</a>
+      <a href="#howto">利用方法</a>
+      <a href="#download">ダウンロード・利用規約</a>
+    </nav>
+  </header>
 
   <!-- ==========================================
      1. ヒーローセクション（ページ最上部：背景動画対応）
   ============================================= -->
-  <header class="hero-section">
+  <header class="hero-section" id="top">
     <!-- ★ 新設：ヒーロー背景動画（ビデオを最背面に配置） -->
     <video src="video/hero-bg.mp4" autoplay loop muted playsinline class="hero-video-bg"></video>
     
@@ -40,7 +51,7 @@
   <main class="main-container">
 
     <!-- アプリの概要解説セクション -->
-    <section class="app-overview scroll-anim-up">
+    <section class="app-overview scroll-anim-up" id="overview">
       <div class="overview-inner">
         <span class="overview-label">概要</span>
         <h2>文字スーパーみたいなのをパソコンで表示するやつ</h2>
@@ -51,7 +62,7 @@
     </section>
 
     <!-- 動作イメージ（左右交互にスクロール出現するデモ）エリア -->
-    <section class="app-demo-scroll-area">
+    <section class="app-demo-scroll-area" id="demo">
       <div class="demo-scroll-container">
         <h2 class="demo-label">動作イメージ</h2>
         
@@ -98,7 +109,7 @@
     </section>
 
     <!-- 設定アピールセクション（右画像 / 左テキスト） -->
-    <section class="app-setting-area">
+    <section class="app-setting-area" id="settings">
       <div class="demo-scroll-item reversed">
         <div class="demo-media-container demo-anim-right">
           <div class="demo-media-wrapper">
@@ -148,7 +159,7 @@
     </section>
 
     <!-- 利用方法ページへの誘導ボタンエリア -->
-    <section class="app-howto-guide-area scroll-anim-up">
+    <section class="app-howto-guide-area scroll-anim-up" id="howto">
       <div class="howto-guide-container">
         <a href="./HowTo/index.html" class="btn btn-secondary btn-large">
           <svg viewBox="0 -960 960 960" class="btn-svg-icon"><path fill="currentColor" d="M240-120q-33 0-56.5-23.5T160-240v-480q0-33 23.5-56.5T240-800h360l200 200v360q0 33-23.5 56.5T720-120H240Zm0-80h480v-320H560v-160H240v480Zm400-360v-40H520v40h120ZM240-200h480-480Z"/></svg>
@@ -160,11 +171,11 @@
     <!-- ==========================================
        3. ダウンロードエリア（最下部）
     ============================================= -->
-    <section class="cta-section scroll-anim-up">
+    <section class="cta-section scroll-anim-up" id="download">
       <h2>ダウンロード・利用規約</h2>
       
       <!-- 開発中の注意書きバッジ -->
-      <div class="dev-warning-badge">【注意】現在開発中のプレビュー版です</div>
+      <div class="dev-warning-badge" id="dev-warning-badge">【注意】現在開発中のプレビュー版です</div>
       <div class="info-split-card accent-border-danger" style="margin-bottom: 20px;">
           <div class="info-card-icon text-danger-color">
             <svg viewBox="0 -960 960 960" class="app-svg-icon"><path fill="currentColor" d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
@@ -176,9 +187,55 @@
               完全無保証です。本ソフトウェアは無料のフリーソフトです。動作の保証や、情報の正確性の保証は一切ありません。　お使いのPCに不具合が起きた場合や、地震情報の遅延・誤りによって損害が生じた場合も、当方は一切の責任を負いません。
           </p>
           <details class="software-readme-disclosure">
-            <summary>ソフトウェア情報を表示</summary>
-            <div id="software-readme" class="software-readme" aria-live="polite">
-              <p class="software-readme-status">READMEを読み込んでいます...</p>
+            <summary>利用規約を表示</summary>
+            <div class="software-readme">
+              <h3>Earthquake-Overlay 利用規約</h3>
+              <p>この利用規約（以下「本規約」）は、もっちー（以下「当方」）が提供するEarthquake-Overlay（以下「本ソフトウェア」）の利用条件を定めるものです。<strong>本ソフトウェアをダウンロード、または実行した時点で、本規約に同意したものとみなします。</strong></p>
+
+              <h4>第1条（定義）</h4>
+              <p>本規約において使用する用語の定義は、次の通りとします。</p>
+              <ul>
+                <li>「ユーザー」とは、本ソフトウェアをダウンロード、解凍、または実行したすべての個人または法人をいいます。</li>
+                <li>「地震情報」とは、本ソフトウェアを通じて配信・表示される、地震に関する一切のデータおよび情報をいいます。</li>
+              </ul>
+
+              <h4>第2条（外部APIの利用と免責・アップデート）</h4>
+              <ol>
+                <li>本ソフトウェアは、地震情報の取得にあたり<strong>「P2P地震情報 API」</strong>を利用しています。そのため、本ソフトウェア内の地震情報の速報性・正確性・継続性は、同APIおよび配信元に依存します。</li>
+                <li>本ソフトウェアは現状のまま無料で提供されるものであり、当方はバグの修正や動作の完全性を保証しません。</li>
+                <li>本ソフトウェアの利用、または仕様変更や配信障害などにより利用できなかったことによって生じたPCの不具合、データの損失、その他一切の損害（情報の遅延による避難の遅れ等を含む）について、当方およびP2P地震情報API提供者は責任を負いません。実際の防災行動は公的機関の発表に従ってください。</li>
+                <li>ユーザーが本ソフトウェアのアップデート（バージョン確認機能を含む）を回避し、旧バージョンを継続して利用した場合、<strong>当方は一切のサポートを行わず、情報の配信停止を含めた利用制限措置を予告なく講じることができる</strong>ものとします。それにより生じた損害についても一切の責任を負いません。</li>
+                <li><strong>バージョン確認機能が搭載される前の過去のバージョンを利用する行為は、前項の「バージョン確認機能の回避」とみなして同様に扱い、一切のサポート対象外とします。</strong></li>
+              </ol>
+
+              <h4>第3条（利用の制限と事前許可）</h4>
+              <p>ユーザーは、以下の方法で本ソフトウェアまたはそこから得られる地震情報等を利用する場合、<strong>事前に当方の明示的な許可を得なければならない</strong>ものとします。</p>
+              <ul>
+                <li>法人（会社、各種団体、個人事業主を含む）による業務での利用</li>
+                <li>YouTube、ニコニコ動画、ツイキャス等の動画配信・生放送プラットフォームでの利用（個人・法人を問わず、画面の映り込みや音声の利用を含む）</li>
+              </ul>
+
+              <h4>第4条（禁止事項およびお願い）</h4>
+              <ol>
+                <li>ユーザーは、以下の行為を行ってはなりません。
+                  <ul>
+                    <li>本ソフトウェアの改造、解析（リバースエンジニアリング、<strong>バージョン確認機能の無効化・回避</strong>等）</li>
+                    <li>本ソフトウェア、または取得した地震データの無断での有償販売・転売</li>
+                    <li>当方の許可なく、第3条に定める方法で本ソフトウェアを利用する行為</li>
+                    <li>当方、または<strong>P2P地震情報APIのサーバーに過度な負荷をかける行為</strong></li>
+                  </ul>
+                </li>
+                <li><strong>【お願い：多重起動について】</strong> 本ソフトウェアの多重起動（同一PCや環境内での同時複数実行）は、P2P地震情報APIのサーバーへ意図しない負荷をかける原因となります。サーバー保護のため、<strong>ユーザーの皆様におかれましては多重起動をお控えいただきますようお願いいたします。</strong></li>
+                <li><strong>【お願い：エラー時の対応について】</strong> 本ソフトウェアは個人が開発・運営する無料のフリーソフトです。万が一エラーや不具合が発生した場合は、<strong>問い合わせを行う前に、まずは利用方法ページやインターネット等でご自身で原因をお調べいただきますようお願いいたします。</strong></li>
+              </ol>
+
+              <h4>第5条（その他）</h4>
+              <ol>
+                <li>詳しい利用方法、事前許可の申請窓口、最新の案内については、当方の「利用方法ページ（<a href="./HowTo/index.html">利用方法ページ</a>）」をご確認ください。</li>
+                <li>本規約の解釈にあたっては、日本法を準拠法とします。</li>
+              </ol>
+
+              <p>[ 2026年10月1日 制定 ]</p>
             </div>
           </details>
       </div>
