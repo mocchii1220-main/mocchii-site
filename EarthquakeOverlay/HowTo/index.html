@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>利用方法 | Earthquake-Overlay</title>
+	<meta name="description" content="Earthquake-Overlayのダウンロード、起動、config.jsonの設定方法をご案内します。">
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../mobile.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header class="site-header" id="site-header">
+		<a class="site-brand" href="../index.html#top" aria-label="Earthquake-Overlay トップへ">
+			<img src="../images/logo.webp" alt="Earthquake-Overlay">
+		</a>
+		<button type="button" class="menu-toggle" id="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-navigation">
+			<span class="menu-toggle-line"></span>
+			<span class="menu-toggle-line"></span>
+			<span class="menu-toggle-line"></span>
+		</button>
+		<nav class="site-navigation" id="site-navigation" aria-label="メインメニュー" aria-hidden="true">
+			<a href="../index.html#overview">概要</a>
+			<a href="../index.html#demo">動作イメージ</a>
+			<a href="../index.html#settings">設定</a>
+			<a href="#guide">利用方法</a>
+			<a href="../index.html#download">ダウンロード・利用規約</a>
+		</nav>
+	</header>
+
+	<main class="howto-main" id="guide">
+		<section class="howto-intro">
+			<span class="overview-label">HOW TO USE</span>
+			<h1 class="howto-page-title">利用方法</h1>
+			<p class="howto-page-lead">ダウンロードから起動、config.jsonの設定まで</p>
+			<h2>はじめにご確認ください</h2>
+			<p>Earthquake-OverlayはWindows向けのソフトウェアです。地震情報の取得にはインターネット接続が必要です。</p>
+		</section>
+
+		<section class="howto-step" id="download">
+			<div class="howto-step-number" aria-hidden="true">01</div>
+			<div class="howto-step-content">
+				<span class="howto-step-label">DOWNLOAD</span>
+				<h2>ダウンロード</h2>
+				<p>GitHubのReleasesから最新版をダウンロードしてください。配布ファイルはexe形式で、Windows専用です。</p>
+				<a class="btn btn-primary howto-action" href="../">
+					<svg viewBox="0 -960 960 960" class="btn-svg-icon" aria-hidden="true"><path fill="currentColor" d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
+					ダウンロード・紹介ページを開く
+				</a>
+			</div>
+		</section>
+
+		<section class="howto-step" id="launch">
+			<div class="howto-step-number" aria-hidden="true">02</div>
+			<div class="howto-step-content">
+				<span class="howto-step-label">START</span>
+				<h2>起動する</h2>
+				<p>ダウンロードしたexeファイルを実行します。地震情報が表示されない場合は、インターネット接続とP2P地震情報APIの配信状況をご確認ください。</p>
+				<p class="howto-note">地震情報の遅延や配信停止が発生する場合があります。実際の防災行動は公的機関の発表に従ってください。</p>
+			</div>
+		</section>
+
+		<section class="howto-step" id="configuration">
+			<div class="howto-step-number" aria-hidden="true">03</div>
+			<div class="howto-step-content">
+				<span class="howto-step-label">CONFIGURATION</span>
+				<h2>config.jsonを編集する</h2>
+				<p>設定を変更する場合は、config.jsonをテキストエディターで開いて編集します。次は設定画面に掲載している例です。</p>
+				<div class="howto-config-grid">
+					<pre><code>{
+	"connect_mode": "normal",
+	"min_sindo": "30"
+}</code></pre>
+					<figure class="howto-config-figure">
+						<img src="../images/setting.png" alt="config.jsonをテキストエディターで編集している画面">
+						<figcaption>設定ファイルの編集例</figcaption>
+					</figure>
+				</div>
+				<ul class="howto-checklist">
+					<li>設定項目名や値は、配布ファイルに含まれる設定例に合わせてください。</li>
+					<li>JSONの書式を保ち、項目名と文字列の値はダブルクォーテーションで囲みます。</li>
+					<li>編集前にconfig.jsonのコピーを作成しておくと、元の設定に戻せます。</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="howto-step" id="troubleshooting">
+			<div class="howto-step-number" aria-hidden="true">04</div>
+			<div class="howto-step-content">
+				<span class="howto-step-label">TROUBLESHOOTING</span>
+				<h2>情報が届かない・起動できないとき</h2>
+				<ul class="howto-checklist">
+					<li>インターネットに接続できることを確認してください。</li>
+					<li>本ソフトウェアを複数起動している場合は、1つだけにしてください。</li>
+					<li>P2P地震情報APIを利用する他のアプリが起動中の場合は、いったん終了して再度お試しください。</li>
+					<li>config.jsonを編集した場合は、JSONの括弧・カンマ・引用符を確認し、配布時の設定例と見比べてください。</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="howto-footer-cta">
+			<p>ソフトウェアの概要と利用規約はこちら</p>
+			<a class="btn btn-secondary btn-large" href="../index.html#download">ダウンロード・利用規約へ</a>
+		</section>
+	</main>
+
+	<footer class="footer-section">
+		<p>Copyright © 2026 mocchii All Rights Reserved.</p>
+	</footer>
+
+	<script src="js/main.js"></script>
+</body>
+</html>

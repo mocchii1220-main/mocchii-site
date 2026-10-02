@@ -1,4 +1,11 @@
 @media (max-width: 600px) {
+  .site-header { height: 64px; padding: 0 14px; }
+  .site-brand img { width: 136px; height: 42px; }
+  .site-navigation {
+    top: calc(100% + 8px);
+    right: 12px;
+    width: min(340px, calc(100vw - 24px));
+  }
   .hero-section {
     height: auto;
     min-height: 100vh;
@@ -7,10 +14,6 @@
   }
   .hero-title { font-size: 2.5rem; }
   .hero-lead { font-size: 1rem; }
-  .theme-toggle {
-    top: max(12px, env(safe-area-inset-top));
-    right: max(12px, env(safe-area-inset-right));
-  }
   .main-container { padding: 0 16px 64px; }
   .demo-anim-left, .demo-anim-right, .scroll-anim-up { animation: none; }
   .app-overview { padding: 72px 0 56px; }
@@ -57,7 +60,5 @@
 }
 
 @media (max-width: 600px) and (hover: none) {
-  .theme-toggle:hover { width: 46px; gap: 0; transform: none; }
-  .theme-toggle:hover .theme-toggle-label { max-width: 0; opacity: 0; }
   .btn-primary:hover, .btn-secondary:hover { transform: none; }
 }
