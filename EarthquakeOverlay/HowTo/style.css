@@ -98,6 +98,12 @@
 	border-left: 4px solid var(--danger);
 	background: var(--bg-card);
 }
+.howto-tip {
+	margin-top: 18px;
+	padding: 14px 16px;
+	border-left: 4px solid var(--primary);
+	background: var(--bg-card);
+}
 .howto-config-grid {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

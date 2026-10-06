@@ -1,4 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const openingOverlay = document.getElementById("opening-video-overlay");
+  const openingVideo = openingOverlay?.querySelector("video");
+  const openingScreen = window.matchMedia(
+    "(min-width: 768px) and (min-aspect-ratio: 3/2) and (max-aspect-ratio: 2/1)"
+  );
+
+  if (openingOverlay && openingVideo && openingScreen.matches) {
+    const resumeOpeningVideo = () => {
+      if (document.visibilityState !== "visible" || openingVideo.ended) return;
+
+      openingVideo.play().catch((error) => {
+        if (document.visibilityState === "visible") {
+          closeOpeningVideo();
+          if (!openingVideo.error) {
+            console.warn("Opening video could not be played.", error);
+          }
+        }
+      });
+    };
+
+    const closeOpeningVideo = () => {
+      openingOverlay.classList.remove("is-visible");
+      openingOverlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("is-opening-video");
+      document.removeEventListener("visibilitychange", resumeOpeningVideo);
+    };
+
+    const playOpeningVideo = (source) => {
+      openingOverlay.classList.add("is-visible");
+      openingOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("is-opening-video");
+      openingVideo.addEventListener("ended", closeOpeningVideo, { once: true });
+      openingVideo.addEventListener("error", () => {
+        console.error("Opening video failed to load or decode.", openingVideo.error);
+        closeOpeningVideo();
+      }, { once: true });
+      openingVideo.addEventListener("canplay", resumeOpeningVideo, { once: true });
+      document.addEventListener("visibilitychange", resumeOpeningVideo);
+
+      openingVideo.autoplay = true;
+      openingVideo.src = source;
+    };
+
+    if (window.location.protocol === "file:") {
+      const inlineVideoScript = document.createElement("script");
+      inlineVideoScript.src = new URL("video/opening-video-data.js", document.baseURI);
+      inlineVideoScript.onload = () => {
+        if (typeof window.openingVideoData !== "string") {
+          console.error("Opening video data is missing.");
+          closeOpeningVideo();
+          return;
+        }
+        playOpeningVideo(`data:video/mp4;base64,${window.openingVideoData}`);
+      };
+      inlineVideoScript.onerror = () => {
+        console.error("Opening video data failed to load.");
+        closeOpeningVideo();
+      };
+      document.head.append(inlineVideoScript);
+    } else {
+      playOpeningVideo("video/Opening.mp4");
+    }
+  }
+
   const siteHeader = document.getElementById("site-header");
   const menuToggle = document.getElementById("menu-toggle");
   const siteNavigation = document.getElementById("site-navigation");

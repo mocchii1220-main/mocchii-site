@@ -28,6 +28,27 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+body.is-opening-video { overflow: hidden; }
+
+.opening-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.opening-video-overlay.is-visible { display: flex; opacity: 1; pointer-events: auto; }
+.opening-video-overlay video { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 768px) and (min-aspect-ratio: 3/2) and (max-aspect-ratio: 2/1) {
+  .opening-video-overlay { display: flex; }
+}
+.opening-video-overlay:not(.is-visible) { visibility: hidden; }
 
 .site-header {
   position: fixed;
@@ -104,6 +125,7 @@ body {
 /* 埋め込みSVGアイコンのサイズ共通調整 */
 .app-svg-icon { width: 28px; height: 28px; display: block; }
 .btn-svg-icon { width: 20px; height: 20px; display: inline-block; }
+.btn-material-icon { width: 20px; height: 20px; display: inline-block; font-size: 20px; line-height: 1; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }
 .modal-svg-icon { width: 56px; height: 56px; display: block; margin: 0 auto; }
 
 /* ==========================================

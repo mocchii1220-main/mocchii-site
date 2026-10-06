@@ -5,6 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>利用方法 | Earthquake-Overlay</title>
 	<meta name="description" content="Earthquake-Overlayのダウンロード、起動、config.jsonの設定方法をご案内します。">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
 	<link rel="stylesheet" href="../style.css">
 	<link rel="stylesheet" href="../mobile.css">
 	<link rel="stylesheet" href="style.css">
@@ -32,17 +35,16 @@
 		<section class="howto-intro">
 			<span class="overview-label">HOW TO USE</span>
 			<h1 class="howto-page-title">利用方法</h1>
-			<p class="howto-page-lead">ダウンロードから起動、config.jsonの設定まで</p>
-			<h2>はじめにご確認ください</h2>
-			<p>Earthquake-OverlayはWindows向けのソフトウェアです。地震情報の取得にはインターネット接続が必要です。</p>
+			<p class="howto-page-lead">真面目に解説してあげます</p>
+			<p>前提条件 WIndowsであり、exeファイルを実行できること、及びインターネットに接続できること</p>
+            <p>MacOS? Linux? <a href="https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0/000H">Windows買おう！</a></p>
 		</section>
 
 		<section class="howto-step" id="download">
 			<div class="howto-step-number" aria-hidden="true">01</div>
 			<div class="howto-step-content">
-				<span class="howto-step-label">DOWNLOAD</span>
 				<h2>ダウンロード</h2>
-				<p>GitHubのReleasesから最新版をダウンロードしてください。配布ファイルはexe形式で、Windows専用です。</p>
+				<p>紹介ページから最新版をダウンロードしてください。 <br>最新バージョンのAssetsっていうところにあるmain.exeです</p>
 				<a class="btn btn-primary howto-action" href="../">
 					<svg viewBox="0 -960 960 960" class="btn-svg-icon" aria-hidden="true"><path fill="currentColor" d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
 					ダウンロード・紹介ページを開く
@@ -53,19 +55,27 @@
 		<section class="howto-step" id="launch">
 			<div class="howto-step-number" aria-hidden="true">02</div>
 			<div class="howto-step-content">
-				<span class="howto-step-label">START</span>
+				<h2>適当なフォルダを作成する(任意・推奨)</h2>
+				<p>適当な名前でフォルダを作成して、その中にmain.exeを入れます。フォルダの場所や名前は間違って消さない場所がおすすめです。</p>
+			</div>
+		</section>
+
+
+		<section class="howto-step" id="launch">
+			<div class="howto-step-number" aria-hidden="true">03</div>
+			<div class="howto-step-content">
 				<h2>起動する</h2>
-				<p>ダウンロードしたexeファイルを実行します。地震情報が表示されない場合は、インターネット接続とP2P地震情報APIの配信状況をご確認ください。</p>
+				<p>ダブルクリックで普通に起動<br>初回起動時、SmartScreen(青いウィンドウ)が表示される場合があります<br>その場合は<u>詳細情報</u>をクリックし、表示された実行をクリックしてください。</p>
+				<p class="howto-tip"><strong>Tips:</strong> exeファイルのショートカットをWindowsのスタートアップに登録しておくとなにかと便利です。<br>やりかたはしらべてね</p>
 				<p class="howto-note">地震情報の遅延や配信停止が発生する場合があります。実際の防災行動は公的機関の発表に従ってください。</p>
 			</div>
 		</section>
 
 		<section class="howto-step" id="configuration">
-			<div class="howto-step-number" aria-hidden="true">03</div>
+			<div class="howto-step-number" aria-hidden="true">04</div>
 			<div class="howto-step-content">
-				<span class="howto-step-label">CONFIGURATION</span>
 				<h2>config.jsonを編集する</h2>
-				<p>設定を変更する場合は、config.jsonをテキストエディターで開いて編集します。次は設定画面に掲載している例です。</p>
+				<p>confgi.jsonを編集すると、ソフトウェアの設定を変更することができます。</p>
 				<div class="howto-config-grid">
 					<pre><code>{
 	"connect_mode": "normal",
@@ -73,15 +83,15 @@
 }</code></pre>
 					<figure class="howto-config-figure">
 						<img src="../images/setting.png" alt="config.jsonをテキストエディターで編集している画面">
-						<figcaption>設定ファイルの編集例</figcaption>
+						<figcaption>設定ファイルの編集例 (画像のコードエディタはVSCode)</figcaption>
 					</figure>
 				</div>
-				<h3 class="howto-setting-heading">connect_mode（受信モード）</h3>
+				<h3 class="howto-setting-heading">"connect_mode" 受信するデータの選択的なの</h3>
 				<ul class="howto-checklist">
 					<li><code>normal</code>：リアルタイムの地震情報を受信します。</li>
 					<li><code>sandbox</code>：テストモードです。過去の地震情報を30秒に1回受信します。</li>
 				</ul>
-				<h3 class="howto-setting-heading">min_sindo（震度の設定値）</h3>
+				<h3 class="howto-setting-heading">"min_sindo" 地名ごとの震度を表示する最小震度</h3>
 				<p>設定値と震度の対応は次の通りです。例の <code>"30"</code> は震度3に対応します。</p>
 				<table class="howto-setting-table">
 					<thead>
@@ -102,7 +112,7 @@
 				<ul class="howto-checklist">
 					<li>設定項目名や値は、配布ファイルに含まれる設定例に合わせてください。</li>
 					<li>JSONの書式を保ち、項目名と文字列の値はダブルクォーテーションで囲みます。</li>
-					<li>編集前にconfig.jsonのコピーを作成しておくと、元の設定に戻せます。</li>
+					<li>config.jsonは削除すると起動時に自動生成されるので、動かなくなったら消してみるといけるかも</li>
 				</ul>
 			</div>
 		</section>
@@ -110,14 +120,26 @@
 		<section class="howto-step" id="troubleshooting">
 			<div class="howto-step-number" aria-hidden="true">04</div>
 			<div class="howto-step-content">
-				<span class="howto-step-label">TROUBLESHOOTING</span>
 				<h2>情報が届かない・起動できないとき</h2>
 				<ul class="howto-checklist">
 					<li>インターネットに接続できることを確認してください。</li>
 					<li>本ソフトウェアを複数起動している場合は、1つだけにしてください。</li>
 					<li>P2P地震情報APIを利用する他のアプリが起動中の場合は、いったん終了して再度お試しください。</li>
 					<li>config.jsonを編集した場合は、JSONの括弧・カンマ・引用符を確認し、配布時の設定例と見比べてください。</li>
+					<li>エラーメッセージ( Handshake status 429 Too Many Requests(以下略))などが表示された場合はgoogleなどで検索してみてください。</li>
 				</ul>
+			</div>
+		</section>
+
+				<section class="howto-step" id="troubleshooting">
+			<div class="howto-step-number" aria-hidden="true"></div>
+			<div class="howto-step-content">
+				<h2>問い合わせ</h2>
+				<p>リソースの都合上、返信まで時間がかかる場合があります、また、検索やインターネットの再接続で解決する場合もあります、一度解決策を自分で試していただけますと幸いです。</p>
+				<a class="btn btn-primary howto-action" href="https://forms.gle/cGX7Sv2rEuoGsP7Y6">
+					<span class="material-symbols-outlined btn-material-icon" aria-hidden="true">contact_mail</span>
+					問い合わせフォームへ
+				</a>
 			</div>
 		</section>
 
