@@ -70,6 +70,34 @@
 	font-size: 1.1rem;
 	font-weight: 800;
 }
+.howto-method-heading {
+	padding: 12px 16px;
+	border-left: 4px solid var(--primary);
+	background: var(--bg-card);
+	font-size: 1.2rem;
+}
+.howto-config-details > summary {
+	cursor: pointer;
+}
+.howto-config-details > summary::marker {
+	color: var(--primary);
+}
+.howto-config-details {
+	interpolate-size: allow-keywords;
+}
+.howto-config-details::details-content {
+	block-size: 0;
+	overflow: clip;
+	opacity: 0;
+	transition: block-size 250ms ease, opacity 200ms ease, content-visibility 250ms allow-discrete;
+}
+.howto-config-details[open]::details-content {
+	block-size: auto;
+	opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+	.howto-config-details::details-content { transition: none; }
+}
 .howto-setting-table {
 	width: min(100%, 440px);
 	margin-top: 14px;
