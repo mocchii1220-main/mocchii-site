@@ -191,7 +191,6 @@ body.is-opening-video { overflow: hidden; }
   width: min(100%, 420px);
   height: auto;
   margin: 0 auto;
-  filter: brightness(0) invert(1);
 }
 .hero-lead {
   font-size: 1.4rem;
