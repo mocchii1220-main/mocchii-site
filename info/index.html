@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>山田 太郎 | 自己紹介</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 色・フォントはここで変更できます ===== */
+:root{
+  --bg:#f2f3f5;--fg:#14171c;--muted:#6b717b;--line:rgba(20,23,28,.15);--accent:#2f48d8;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --ease:cubic-bezier(.22,.8,.24,1);
+  color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;line-height:1.9;letter-spacing:.04em;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+::selection{background:var(--accent);color:#fff}
+.progress{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;z-index:30}
+
+header{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(22px + env(safe-area-inset-top,0px)) clamp(20px,5vw,56px) 22px;font-size:.85rem;font-weight:400;opacity:0;animation:fade 1.6s .6s forwards}
+header nav{display:flex;gap:clamp(14px,3.4vw,32px)}
+.ul{position:relative;display:inline-block}
+.ul::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .9s var(--ease)}
+a:hover>.ul::after,a:focus-visible>.ul::after,a.on>.ul::after{transform:scaleX(1);transform-origin:left}
+a.on{color:var(--accent)}
+@keyframes fade{to{opacity:1}}
+
+main{position:relative;z-index:1;padding:0 clamp(20px,5vw,56px)}
+.wrap{max-width:1080px;margin:0 auto}
+.view{display:none}.view.cur{display:block}
+.view.play{animation:vin 1.2s ease both}
+@keyframes vin{from{opacity:0}to{opacity:1}}
+
+/* 見出し文字: マスクからゆっくり立ち上がる */
+.m{display:inline-block;overflow:hidden;padding:.06em 0 .24em;margin-bottom:-.24em}
+.m>span{display:inline-block;transform:translateY(135%)}
+.play .m>span{animation:rise 1.9s var(--ease) forwards}
+@keyframes rise{to{transform:none}}
+.gap{display:inline-block;width:.35em}
+.line{height:1px;background:var(--fg);transform:scaleX(0);transform-origin:left}
+.play .line{animation:draw 2.2s .8s var(--ease) forwards}
+@keyframes draw{to{transform:none}}
+
+/* ホーム */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 0 clamp(48px,9vh,96px)}
+.name{font-weight:800;font-size:clamp(3.1rem,5vw,10.5rem);line-height:1.05;letter-spacing:.03em;margin:0 0 clamp(24px,4vw,40px);display:flex;flex-wrap:wrap}
+.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;margin-top:20px;font-size:.95rem;color:var(--muted);opacity:0}
+.play .meta{animation:fade 1.6s 1.6s forwards}
+.meta b{font-weight:500;color:var(--fg)}
+.type::after{content:"";display:inline-block;width:1px;height:1em;background:var(--accent);margin-left:3px;vertical-align:-.12em;animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.s{display:grid;grid-template-columns:minmax(120px,1fr) 3fr;gap:24px clamp(24px,6vw,80px);padding:clamp(72px,12vw,140px) 0;border-top:1px solid var(--line)}
+h2{font-weight:700;font-size:1.05rem;letter-spacing:.14em;margin:0;position:sticky;top:calc(72px + env(safe-area-inset-top,0px));align-self:start}
+.about p{margin:0 0 1.6em;max-width:34em;font-size:1.05rem}
+.about .lead{font-weight:500;font-size:clamp(1.4rem,3.2vw,2.1rem);line-height:1.7;letter-spacing:.05em;max-width:20em}
+
+/* ===== ホバーは transform だけで動かす(レイアウトを動かさないので滑らか) ===== */
+.slide{transition:transform 1.1s var(--ease),color .8s var(--ease);will-change:transform}
+.gate{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:clamp(24px,4.4vw,44px) 0;border-top:1px solid var(--line);position:relative}
+.gate:last-child{border-bottom:1px solid var(--line)}
+.gate::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)}
+.gate:hover::before,.gate:focus-visible::before{transform:scaleX(1)}
+.gate:hover strong,.gate:focus-visible strong{transform:translateX(14px);color:var(--accent)}
+.gate strong{font-weight:500;font-size:clamp(1.9rem,6.4vw,4rem);line-height:1.2;letter-spacing:.04em}
+.gate span{color:var(--muted);font-size:.9rem;text-align:right}
+
+/* 下層ページ */
+.page{min-height:100svh;padding:clamp(120px,20vh,200px) 0 80px}
+.ptitle{font-weight:500;font-size:clamp(2.6rem,10vw,6.5rem);line-height:1.1;letter-spacing:.03em;margin:0 0 clamp(24px,4vw,40px)}
+.sub{color:var(--muted);margin:20px 0 clamp(40px,7vw,72px);max-width:34em}
+.back{display:inline-block;margin-top:56px;font-size:.9rem;font-weight:400}
+.note{margin:0 0 40px;padding:18px 22px;border-left:2px solid var(--accent);background:rgba(47,72,216,.05);font-size:.92rem;max-width:40em}
+.page p.txt{max-width:36em;margin:0 0 1.4em}
+.page p.txt a{border-bottom:1px solid var(--line)}
+
+/* スクロール表示 */
+.rv{opacity:0;transform:translateY(14px);filter:blur(3px);transition:opacity 1.6s var(--ease),transform 1.6s var(--ease),filter 1.6s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none;filter:none}
+.dl{position:relative}
+.dl::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:var(--line);transform:scaleX(0);transform-origin:left;transition:transform 1.8s var(--ease);transition-delay:var(--d,0s)}
+.dl.in::before{transform:none}
+
+.list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:baseline;padding:32px 0;position:relative}
+.row::after{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)}
+.row:hover::after,.row:focus-visible::after{transform:scaleX(1)}
+.row:hover .slide,.row:focus-visible .slide{transform:translateX(14px)}
+.row:hover h3,.row:focus-visible h3{color:var(--accent)}
+.row h3{font-weight:500;font-size:clamp(1.4rem,3vw,2rem);margin:0;letter-spacing:.05em}
+.row p{grid-column:1;margin:0;color:var(--muted);font-size:.95rem;max-width:32em}
+.row .tag{grid-column:2;grid-row:1;font-size:.82rem;color:var(--muted);text-align:right}
+.row .go{grid-column:2;grid-row:2;justify-self:end;font-size:.82rem;color:var(--accent);opacity:0;transition:opacity 1s var(--ease)}
+.row:hover .go,.row:focus-visible .go{opacity:1}
+.act .row h3{font-size:clamp(1.8rem,5vw,3.2rem)}
+.lk{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:26px 0}
+.lk strong{font-weight:500;font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:.06em}
+.lk span{color:var(--muted);font-size:.9rem}
+.lk:hover strong,.lk:focus-visible strong{transform:translateX(14px);color:var(--accent)}
+.linkbox{border-bottom:1px solid var(--line)}
+
+/* 詳細ページ: 項目表・ギャラリー */
+.kv{margin:0 0 48px;border-top:1px solid var(--line);max-width:40em}
+.kv div{display:grid;grid-template-columns:8em 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.kp div{display:grid;grid-template-columns:18em 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.kv dt{color:var(--muted);font-size:.9rem}
+.kv dd{margin:0;font-weight:500}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;align-items:start}
+.ph{margin:0}
+.ph .fr{overflow:hidden;aspect-ratio:3/2;background:linear-gradient(135deg,#e4e7ec,#d2d7df)}
+.ph.tall .fr{aspect-ratio:2/3}
+.ph.tv .fr,.ph.wide .fr{aspect-ratio:16/9}
+.ph .fr>*{display:block;width:100%;height:100%;object-fit:cover;transition:transform 2.4s var(--ease)}
+.ph:hover .fr>*{transform:scale(1.04)}
+.ph.yt:hover .fr>*{transform:none}
+.ph .fr iframe{border:0}
+.ph .ph-in{display:grid;place-items:center;color:var(--muted);font-size:.85rem}
+.ph.tv .fr{background:linear-gradient(135deg,#232834,#14171c)}
+.ph.tv .ph-in{color:#c9ced8;font-weight:500;font-size:1.05rem;letter-spacing:.12em}
+.ph figcaption{margin-top:10px;font-size:.82rem;color:var(--muted)}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:32px clamp(20px,5vw,56px) 48px;color:var(--muted);font-size:.82rem;text-align:center}
+
+@media (max-width:720px){
+  .s{grid-template-columns:1fr}
+  h2{position:static}
+  .row{grid-template-columns:1fr}
+  .row .tag,.row .go{grid-column:1;grid-row:auto;justify-self:start;text-align:left}
+  .kv div{grid-template-columns:6em 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none;filter:none}
+  .dl::before{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+
+<header>
+  <a href="#home" aria-label="ホーム"><span class="ul">Home</span></a>
+  <nav>
+    <a href="#home" data-nav="home"><span class="ul">ホーム</span></a>
+    <a href="#activities" data-nav="activities"><span class="ul">活動内容</span></a>
+    <a href="#products" data-nav="products"><span class="ul">プロダクト</span></a>
+    <a href="#links" data-nav="links"><span class="ul">リンク</span></a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- ========== ホーム ========== -->
+    <div class="view" data-view="home">
+      <div class="hero">
+        <h1 class="name" data-split="もっちー/つぶな"></h1> <!-- ← 名前 -->
+        <div class="line"></div>
+        <div class="meta">
+          <span><b>Mocchii/Tsubuna</b>いい加減名前統一したいけど時すでにお寿司</span> <!-- ← 肩書き -->
+          <span class="type" id="type"></span>
+        </div>
+      </div>
+
+      <section class="s about">
+        <h2 class="rv">概要</h2>
+        <div>
+          <!-- ↓ 自己紹介文 -->
+          <p class="lead rv" style="--d:.1s">もっちーってなんだよ</p>
+          <p class="rv" style="--d:.25s">知らねえよ</p>
+          <p class="rv" style="--d:.4s">ほっぺがもちもちだかららしいです ちなみによく揉まれます</p>
+          <p class="rv" style="--d:.4s">テロップ再現とか、音Mad作ってたりとか、写真撮ってたりとか<br>なんかすごい色々やってます。ちょっとだけ開発もしてます</p>
+          <p class="rv" style="--d:.4s">きゅうりがすき ■■■もすき ハンバーグが苦手 <br>あとSONY信者予備軍</p>
+        </div>
+      </section>
+
+      <nav aria-label="ページ" style="padding-bottom:clamp(72px,12vw,140px)">
+        <a class="gate rv" href="#activities"><strong class="slide">活動内容</strong><span>やっていること</span></a>
+        <a class="gate rv" href="#products" style="--d:.12s"><strong class="slide">プロダクト</strong><span>つくったもの</span></a>
+        <a class="gate rv" href="#links" style="--d:.24s"><strong class="slide">リンク</strong><span>SNS</span></a>
+        <a class="gate rv" href="#Qualification" style="--d:.24s"><strong class="slide">資格</strong><span>もってる資格</span></a>
+      </nav>
+    </div>
+
+    <!-- ========== 活動内容(一覧) ========== -->
+    <div class="view" data-view="activities">
+      <div class="page">
+        <h1 class="ptitle" data-split="活動内容"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">活動内容(笑)</p>
+        <ul class="list act">
+          <!-- ↓ 活動項目(href は下の各詳細ページの data-view 名と合わせます) -->
+          <li class="dl rv"><a class="row" href="#develop"><h3 class="slide">Develop</h3><span class="tag">開発</span><p class="slide">AIがないとやっていられません。</p><span class="go">詳しく見る</span></a></li>
+          <li class="dl rv" style="--d:.15s"><a class="row" href="#photography"><h3 class="slide">Photography</h3><span class="tag">写真</span><p class="slide">レンズほしい！！</p><span class="go">詳しく見る</span></a></li>
+          <li class="dl rv" style="--d:.3s"><a class="row" href="#telop"><h3 class="slide">Telop</h3><span class="tag">テロップ</span><p class="slide">なんかテロップ再現してたり。</p><span class="go">詳しく見る</span></a></li>
+          <li class="dl rv" style="--d:.45s"><a class="row" href="#video-editing"><h3 class="slide">Video Editing</h3><span class="tag">動画編集</span><p class="slide">音Mad作ってます</p><span class="go">詳しく見る</span></a></li>
+        </ul>
+        <a class="back ul rv" href="#home">ホームに戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== Develop ========== -->
+    <div class="view" data-view="develop">
+      <div class="page">
+        <h1 class="ptitle" data-split="Develop"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">ちょっとだけ作ってます。</p>
+        <dl class="kv rv" style="--d:.1s">
+          <div><dt>使用言語</dt><dd>Python</dd></div>
+          <div><dt>エディタ</dt><dd>Visual Studio Code</dd></div>
+        </dl>
+        <p class="txt rv" style="--d:.2s">Pythonならできるよ!  (ちょっとだけど...)</p>
+        <p class="txt rv" style="--d:.3s">開発して公開しているものは<a href="#products">プロダクト</a>のページにまとめています。</p>
+        <a class="back ul rv" href="#activities">活動内容に戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== Photography ========== -->
+    <div class="view" data-view="photography">
+      <div class="page">
+        <h1 class="ptitle" data-split="Photography"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">こういうの撮ってるよ。</p>
+        <div class="gal">
+          <!-- ↓ 写真に差し替える場合は <div class="ph-in">…</div> を <img src="photo1.jpg" alt="説明"> に置き換えてください。縦長写真は figure に class="tall" を追加 -->
+          <figure class="ph rv"><div class="fr"><img src="./photo/01.webp" alt="これは、写真だよ"></div><figcaption>渋谷の近く</figcaption></figure>
+          <figure class="ph rv" style="--d:.12s"><div class="fr"><img src="./photo/02.webp" alt="これは、写真だよ"></div><figcaption>松島</figcaption></figure>
+          <figure class="ph rv" style="--d:.24s"><div class="fr"><img src="./photo/03.webp" alt="これは、写真だよ"></div><figcaption>花月総持寺駅</figcaption></figure>
+          <figure class="ph tall rv"><div class="fr"><img src="./photo/04.webp" alt="これは、写真だよ"></div><figcaption>笹塚駅</figcaption></figure>
+          <figure class="ph rv" style="--d:.12s"><div class="fr"><img src="./photo/05.webp" alt="これは、写真だよ"></div><figcaption>富士宮浅間大社</figcaption></figure>        </div>
+        <a class="back ul rv" href="#activities">活動内容に戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== Telop ========== -->
+    <div class="view" data-view="telop">
+      <div class="page">
+        <h1 class="ptitle" data-split="Telop"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">著作権...全てAffinityで再現してます</p>
+        <div class="gal" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
+          <!-- ↓ 画像に差し替える場合は <div class="ph-in">…</div> を <img src="telop1.png" alt="説明"> に置き換えてください -->
+          <figure class="ph tv"><div class="fr"><img src="./telop/01.webp" alt="これは、写真だよ"></div><figcaption>ニュースーン</figcaption></figure>
+          <figure class="ph tv" style="--d:.12s"><div class="fr"><img src="./telop/02.webp" alt="これは、写真だよ"></div><figcaption>NHK NEWS</figcaption></figure>
+          <figure class="ph tv" style="--d:.24s"><div class="fr"><img src="./telop/03.webp" alt="これは、写真だよ"></div><figcaption>令和8年熊本地震ベース</figcaption></figure>
+        </div>
+        <a class="back ul rv" href="#activities">活動内容に戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== Video Editing ========== -->
+    <div class="view" data-view="video-editing">
+      <div class="page">
+        <h1 class="ptitle" data-split="Video Editing"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">YMM4最高。</p>
+        <dl class="kv rv" style="--d:.1s">
+          <div><dt>使用ソフト</dt><dd>ゆっくり MovieMaker 4</dd></div>
+        </dl>
+        <p class="txt rv" style="--d:.2s">編集は楽しい 編集しよう</p>
+        <div class="gal" style="margin-top:48px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
+          <!-- ↓ YouTube埋め込み。iframeのsrcと下のリンクのURLを差し替えれば別の動画にできます -->
+          <figure class="ph tv yt rv"><div class="fr"><iframe width="560" height="315" src="https://www.youtube.com/embed/sq39-ksHPIE?si=6-tstdWoiysmSECA" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption><a class="ul" href="https://www.youtube.com/watch?v=sq39-ksHPIE" target="_blank" rel="noopener">YouTubeで開く</a></figcaption></figure>
+          <figure class="ph tv yt rv" style="--d:.12s"><div class="fr"><iframe width="560" height="315" src="https://www.youtube.com/embed/keiGPG5lmKM?si=6vB7xhEuGAzVmMch" title="YouTube video player" frameborder="0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption><a class="ul" href="https://www.youtube.com/watch?v=keiGPG5lmKM" target="_blank" rel="noopener">YouTubeで開く</a></figcaption></figure>
+        </div>
+        <a class="back ul rv" href="#activities">活動内容に戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== プロダクト ========== -->
+    <div class="view" data-view="products">
+      <div class="page">
+        <h1 class="ptitle" data-split="プロダクト"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">自分用につくったものをです。</p>
+        <ul class="list">
+          <!-- ↓ href を各プロダクトのURLに変更してください -->
+          <li class="dl rv"><a class="row" href="https://github.com/mocchii1220-main/eq-overlay" target="_blank" rel="noopener"><h3 class="slide">EQ-Overlay</h3><span class="tag">PC</span><p class="slide">地震情報をPCの画面上にオーバーレイ表示するツール。割と頑張って作ってるから使ってみてほしい。Windowsだけだけど</p><span class="go">開く</span></a></li>
+          <li class="dl rv" style="--d:.15s"><a class="row" href="https://github.com/mocchii1220-main/Youtube_Twitter_DL" target="_blank" rel="noopener"><h3 class="slide">YoutubeとかTwitterの動画DLするやつ</h3><span class="tag">ソースコードのみ</span><p class="slide">YouTube / Twitter の動画をダウンロードするツール。未ビルド ソースコードのみです。</p><span class="go">開く</span></a></li>
+        </ul>
+        <a class="back ul rv" href="#home">ホームに戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== リンク ========== -->
+    <div class="view" data-view="links">
+      <div class="page">
+        <h1 class="ptitle" data-split="リンク"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">SNSと連絡先です。</p>
+        <div class="linkbox">
+          <!-- ↓ href と表示名を変更してください -->
+          <a class="lk dl rv" href="https://x.com/mocchiitt" target="_blank" rel="noopener"><strong class="slide">X</strong><span>@mocchiitt</span></a>
+          <a class="lk dl rv" href="https://x.com/mocchii1220sub" target="_blank" rel="noopener"><strong class="slide">X Sub</strong><span>@mocchii1220sub 鍵アカウント 厳しめ</span></a>
+          <a class="lk dl rv" href="https://github.com/mocchii1220-main" target="_blank" rel="noopener" style="--d:.1s"><strong class="slide">GitHub</strong><span>mocchii1220-main</span></a>
+          <a class="lk dl rv" href="https://www.youtube.com/@tsubuna" target="_blank" rel="noopener" style="--d:.2s"><strong class="slide">YouTube</strong><span>@tsubuna</span></a>
+          <a class="lk dl rv" href="https://marshmallow-qa.com/wntple5uyqk91g7?t=PJsqu6&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener" style="--d:.3s"><strong class="slide">マシュマロ</strong><span>たぶん答えるよ</span></a>
+          <a class="lk dl rv" href="discord://-/users/724577422946598912" style="--d:.4s"><strong class="slide">Discord</strong><span>@211k5000</span></a>
+        </div>
+        <a class="back ul rv" href="#home">ホームに戻る</a>
+      </div>
+    </div>
+
+    <!-- ========== 資格 ========== -->
+    <div class="view" data-view="Qualification">
+      <div class="page">
+        <h1 class="ptitle" data-split="資格"></h1>
+        <div class="line"></div>
+        <p class="sub rv" style="margin-top:20px">自慢したいからね、仕方ないね</p>
+        <dl class="kp rv" style="--d:.1s">
+          <div><dt>プレゼンテーション作成検定試験</dt><dd>3級</dd></div>
+          <div><dt>情報処理技能検定試験 表計算</dt><dd>2級</dd></div>
+          <div><dt>文章入力スピード認定試験</dt><dd>1級</dd></div>
+          <div><dt>プログラミング技能検定試験</dt><dd>2級</dd></div>
+        </dl>
+        <a class="back ul rv" href="#activities">活動内容に戻る</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer><p><b>made in claude</b></p></footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 見出しを1文字ずつマスクに入れる
+  document.querySelectorAll('[data-split]').forEach(function(h){
+    var txt = h.dataset.split, n = 0;
+    h.setAttribute('aria-label', txt);
+    txt.split('').forEach(function(c){
+      if (c === ' ') { var g = document.createElement('span'); g.className = 'gap'; g.setAttribute('aria-hidden','true'); h.appendChild(g); return; }
+      var m = document.createElement('span'), s = document.createElement('span');
+      m.className = 'm'; m.setAttribute('aria-hidden','true');
+      s.textContent = c; s.style.animationDelay = (0.3 + n * 0.2) + 's';
+      m.appendChild(s); h.appendChild(m); n++;
+    });
+  });
+
+  // タイピング(ホームの肩書き横)
+  var words = ['もちもちー', 'もちー'];
+  var t = document.getElementById('type'), w = 0, p = 0, del = false, started = false;
+  function tick(){
+    var cur = words[w];
+    t.textContent = cur.slice(0, p);
+    if (!del && p === cur.length) { del = true; return setTimeout(tick, 2200); }
+    if (del && p === 0) { del = false; w = (w + 1) % words.length; return setTimeout(tick, 700); }
+    p += del ? -1 : 1;
+    setTimeout(tick, del ? 50 : 120);
+  }
+
+  // スクロールで静かに現れる
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+
+  // ページ切り替え。詳細ページではメニューの「活動内容」を強調
+  var views = {};
+  var parent = { develop: 'activities', photography: 'activities', telop: 'activities', 'video-editing': 'activities' };
+  var titles = { activities: '活動内容', develop: 'Develop', photography: 'Photography', telop: 'Telop', 'video-editing': 'Video Editing', products: 'プロダクト', links: 'リンク' };
+  document.querySelectorAll('.view').forEach(function(v){ views[v.dataset.view] = v; });
+  function show(){
+    var name = location.hash.replace('#', '');
+    if (!views[name]) name = 'home';
+    Object.keys(views).forEach(function(k){
+      var v = views[k];
+      v.classList.toggle('cur', k === name);
+      v.classList.remove('play');
+      v.querySelectorAll('.rv').forEach(function(el){ el.classList.remove('in'); io.unobserve(el); });
+    });
+    var cur = views[name];
+    scrollTo(0, 0);
+    void cur.offsetWidth;
+    cur.classList.add('play');
+    cur.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+    var navName = parent[name] || name;
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      var on = a.dataset.nav === navName;
+      a.classList.toggle('on', on);
+      if (on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    if (name === 'home' && !started) {
+      started = true;
+      if (reduce) t.textContent = words[0]; else setTimeout(tick, 2400);
+    }
+    document.title = (titles[name] ? titles[name] + ' | ' : '') + '山田 太郎 | 自己紹介';
+    prog();
+  }
+
+  // 進捗バー
+  var bar = document.getElementById('bar');
+  function prog(){ var d = document.documentElement, max = d.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (max > 0 ? scrollY / max : 0) + ')'; }
+  addEventListener('scroll', prog, { passive: true });
+  addEventListener('hashchange', show);
+  show();
+
+})();
+</script>
+</body>
+</html>
